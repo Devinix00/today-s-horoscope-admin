@@ -6,6 +6,7 @@ import ContentsTabs from "./components/ContentsTabs";
 import useTabStore from "../../_stores/useTabStore";
 import Zodiac from "./components/zodiac/Zodiac";
 import Star from "./components/star/Star";
+import Mbti from "./components/mbti/Mbti";
 
 function Contents() {
   const { tabId } = useTabStore();
@@ -15,7 +16,7 @@ function Contents() {
       <ContentsTabs />
       {tabId === 1 && <Zodiac />}
       {tabId === 2 && <Star />}
-      {tabId === 3 && <></>}
+      {tabId === 3 && <Mbti />}
     </MainContainer>
   );
 }

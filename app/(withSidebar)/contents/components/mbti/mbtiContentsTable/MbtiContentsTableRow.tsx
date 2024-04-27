@@ -1,18 +1,19 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import TableCell from "../../../../../_components/table/TableCell";
-import { StarData } from "./fakeData";
+import { Mbti } from "./fakeData";
 import TableButton from "../../../../../_components/table/TableButton";
 
-interface StarContentsTableRowProps {
-  star: StarData;
+interface MbtiContentsTableRowProps {
+  mbti: Mbti;
 }
 
-function StarContentsTableRow({ star }: StarContentsTableRowProps) {
+function MbtiContentsTableRow({ mbti }: MbtiContentsTableRowProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [value, setValue] = useState(star.contents);
-  const [isClickedButton, setisClickedButton] = useState(false);
+  const [value, setValue] = useState(mbti.contents);
+  const [isClickedButton, setIsClickedButton] = useState(false);
+
   const handleClickButton = () => {
-    setisClickedButton(!isClickedButton);
+    setIsClickedButton(!isClickedButton);
     setTimeout(() => {
       textareaRef.current?.focus();
     }, 0);
@@ -20,8 +21,7 @@ function StarContentsTableRow({ star }: StarContentsTableRowProps) {
 
   return (
     <tr>
-      <TableCell size="sm">{star.star}</TableCell>
-      <TableCell>{star.period}</TableCell>
+      <TableCell>{mbti.mbti}</TableCell>
       <TableCell textLeft>
         {isClickedButton ? (
           <textarea
@@ -30,10 +30,10 @@ function StarContentsTableRow({ star }: StarContentsTableRowProps) {
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
               setValue(e.target.value)
             }
-            className="w-full h-[80px] px-2 py-1 resize-none"
+            className="w-full h-[60px] px-2 py-1 resize-none"
           />
         ) : (
-          star.contents
+          mbti.contents
         )}
       </TableCell>
       <TableCell size="sm">
@@ -48,4 +48,4 @@ function StarContentsTableRow({ star }: StarContentsTableRowProps) {
   );
 }
 
-export default StarContentsTableRow;
+export default MbtiContentsTableRow;
