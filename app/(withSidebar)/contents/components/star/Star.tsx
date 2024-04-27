@@ -5,9 +5,9 @@ import useDatePagination from "../../../../_hooks/useDatePagination";
 import PromptHistory from "../../../../_components/promptHistory/PromptHistory";
 import PromptTable from "../../../../_components/promptTable/PromptTable";
 import ContentsForm from "../../../../_components/contentsForm/ContentsForm";
-import ZodiacContentsTable from "./zodiacContentsTable/ZodiacContentsTable";
+import StarContentsTable from "./starContentsTable/StarContentsTable";
 
-function Zodiac() {
+function Star() {
   const [isClickedHistoryButton, setIsClickedHistoryButton] = useState(false);
   const totalItems = 540;
   const itemsPerPage = 7;
@@ -45,7 +45,7 @@ function Zodiac() {
             totalPages,
           }}
         />
-        <ZodiacContentsTable />
+        <StarContentsTable />
       </section>
       {isClickedHistoryButton && (
         <PromptHistory setIsClickedHistoryButton={setIsClickedHistoryButton} />
@@ -54,4 +54,4 @@ function Zodiac() {
   );
 }
 
-export default Zodiac;
+export default Star;

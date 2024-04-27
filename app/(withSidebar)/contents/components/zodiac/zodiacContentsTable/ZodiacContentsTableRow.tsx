@@ -1,11 +1,10 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
-import TableCell from '../../../../../_components/table/TableCell';
-import TableButton from '../../../../../_components/table/TableButton';
-import { ZodiacData } from './fakeData';
+import React, { ChangeEvent, useRef, useState } from "react";
+import TableCell from "../../../../../_components/table/TableCell";
+import TableButton from "../../../../../_components/table/TableButton";
+import { ZodiacData } from "./fakeData";
 
 interface ZodiacContentsTableRowProps {
   zodiac: ZodiacData;
-  index: number;
 }
 
 function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
@@ -15,7 +14,7 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
 
   const handleClickButton = (id: number) => {
     setRowId(id);
-    setInputValues(prev => ({
+    setInputValues((prev) => ({
       ...prev,
       [id]: zodiac.zodiac[id - 1].contents,
     }));
@@ -34,7 +33,7 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
 
   const handleChange = (id: number, event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setInputValues(prev => ({
+    setInputValues((prev) => ({
       ...prev,
       [id]: value,
     }));
@@ -50,8 +49,8 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
             <input
               type="text"
               ref={inputRef}
-              value={inputValues[1] || ''}
-              onChange={e => handleChange(1, e)}
+              value={inputValues[1] || ""}
+              onChange={(e) => handleChange(1, e)}
               className="w-full px-2 py-1"
             />
           ) : (
@@ -59,8 +58,11 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
           )}
         </TableCell>
         <TableCell textLeft>
-          <TableButton isClickedButton={rowId === 1} onClick={() => handleClickButton(1)}>
-            {rowId === 1 ? '저장' : '수정'}
+          <TableButton
+            isClickedButton={rowId === 1}
+            onClick={() => handleClickButton(1)}
+          >
+            {rowId === 1 ? "저장" : "수정"}
           </TableButton>
         </TableCell>
       </tr>
@@ -72,8 +74,8 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
               <input
                 type="text"
                 ref={i + 2 === rowId ? inputRef : null}
-                value={inputValues[i + 2] || ''}
-                onChange={e => handleChange(i + 2, e)}
+                value={inputValues[i + 2] || ""}
+                onChange={(e) => handleChange(i + 2, e)}
                 className="w-full px-2 py-1"
               />
             ) : (
@@ -81,8 +83,11 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
             )}
           </TableCell>
           <TableCell textLeft>
-            <TableButton isClickedButton={rowId === i + 2} onClick={() => handleClickButton(i + 2)}>
-              {rowId === i + 2 ? '저장' : '수정'}
+            <TableButton
+              isClickedButton={rowId === i + 2}
+              onClick={() => handleClickButton(i + 2)}
+            >
+              {rowId === i + 2 ? "저장" : "수정"}
             </TableButton>
           </TableCell>
         </tr>

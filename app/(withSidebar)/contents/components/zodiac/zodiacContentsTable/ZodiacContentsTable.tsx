@@ -1,8 +1,7 @@
-import React from 'react';
-import TableCell from '../../../../../_components/table/TableCell';
-import ZodiacContentsTableHeader from './ZodiacContentsTableHeader';
-import ZodiacContentsTableRow from './ZodiacContentsTableRow';
-import zodiacData from './fakeData';
+import React from "react";
+import ZodiacContentsTableHeader from "./ZodiacContentsTableHeader";
+import ZodiacContentsTableRow from "./ZodiacContentsTableRow";
+import zodiacData from "./fakeData";
 
 function ZodiacContentsTable() {
   return (
@@ -11,9 +10,7 @@ function ZodiacContentsTable() {
         <ZodiacContentsTableHeader />
         <tbody>
           {zodiacData.map((zodiac, i) => (
-            <React.Fragment key={i}>
-              <ZodiacContentsTableRow zodiac={zodiac} index={0} />
-            </React.Fragment>
+            <ZodiacContentsTableRow zodiac={zodiac} key={i} />
           ))}
         </tbody>
       </table>
