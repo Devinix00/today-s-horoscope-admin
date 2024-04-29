@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from "react";
 
 interface TabProps {
   tabId: number;
@@ -8,11 +8,19 @@ interface TabProps {
   setTabId: (tabId: number) => void;
 }
 
-function Tab({ children, tabId, active, setTabId }: PropsWithChildren<TabProps>) {
+function Tab({
+  children,
+  tabId,
+  active,
+  setTabId,
+}: PropsWithChildren<TabProps>) {
   return (
     <button
       onClick={() => setTabId(tabId)}
-      className={`w-36 table-cell border p-2 font-semibold ${active ? 'bg-gray-300' : 'br-white'}`}>
+      className={`w-40 table-cell border p-2 font-semibold ${
+        active ? "bg-gray-300" : "br-white"
+      }`}
+    >
       {children}
     </button>
   );
