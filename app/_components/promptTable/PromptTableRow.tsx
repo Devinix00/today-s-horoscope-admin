@@ -58,7 +58,7 @@ function PromptTableRow({ setIsClickedHistoryButton }: PromptTableRowProps) {
       <tr>
         <TableCell />
         <TableCell />
-        <TableCell>
+        <TableCell size="sm">
           <TableButton blue onClick={() => setIsClickedHistoryButton(true)}>
             히스토리
           </TableButton>
