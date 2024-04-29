@@ -1,7 +1,13 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
-import TableCell from '../table/TableCell';
-import TableButton from '../table/TableButton';
-import pushMsPrompt from '../../(withSidebar)/push-message/components/pushMsDB/pushMsTable/pushMsPromptTable/fakeData';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useRef,
+  useState,
+} from "react";
+import TableCell from "../table/TableCell";
+import TableButton from "../table/TableButton";
+import pushMsPrompt from "../../(withSidebar)/push-message/components/pushMsDB/pushMsTable/pushMsPromptTable/fakeData";
 
 interface PromptTableRowProps {
   setIsClickedHistoryButton: Dispatch<SetStateAction<boolean>>;
@@ -10,7 +16,9 @@ interface PromptTableRowProps {
 function PromptTableRow({ setIsClickedHistoryButton }: PromptTableRowProps) {
   const editTextareaRef = useRef<HTMLTextAreaElement>(null);
   const [isClickedEditButton, setIsClickedEditButton] = useState(false);
-  const [editTextareaValue, setEditTextareaValue] = useState(pushMsPrompt.prompt);
+  const [editTextareaValue, setEditTextareaValue] = useState(
+    pushMsPrompt.prompt
+  );
 
   const handleClickEditButton = () => {
     setIsClickedEditButton(!isClickedEditButton);
@@ -29,7 +37,9 @@ function PromptTableRow({ setIsClickedHistoryButton }: PromptTableRowProps) {
               ref={editTextareaRef}
               name="prompt"
               value={editTextareaValue}
-              onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setEditTextareaValue(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+                setEditTextareaValue(e.target.value)
+              }
               className="w-full h-[240px] resize-none"
             />
           ) : (
@@ -37,8 +47,11 @@ function PromptTableRow({ setIsClickedHistoryButton }: PromptTableRowProps) {
           )}
         </TableCell>
         <TableCell size="sm">
-          <TableButton isClickedButton={isClickedEditButton} onClick={handleClickEditButton}>
-            {isClickedEditButton ? '저장' : '수정'}
+          <TableButton
+            isClickedButton={isClickedEditButton}
+            onClick={handleClickEditButton}
+          >
+            {isClickedEditButton ? "저장" : "수정"}
           </TableButton>
         </TableCell>
       </tr>

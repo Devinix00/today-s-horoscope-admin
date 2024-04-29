@@ -42,7 +42,9 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
   return (
     <React.Fragment>
       <tr>
-        <TableCell rowSpan={4}>{zodiac.title}</TableCell>
+        <TableCell rowSpan={4} size="sm">
+          {zodiac.title}
+        </TableCell>
         <TableCell>{zodiac.zodiac[0].year}</TableCell>
         <TableCell textLeft>
           {rowId === 1 ? (
@@ -82,7 +84,7 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
               item.contents
             )}
           </TableCell>
-          <TableCell textLeft>
+          <TableCell textLeft size="sm">
             <TableButton
               isClickedButton={rowId === i + 2}
               onClick={() => handleClickButton(i + 2)}

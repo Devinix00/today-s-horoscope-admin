@@ -1,6 +1,6 @@
-import PushMsContentsTableHeader from './PushMsContentsTableHeader';
-import PushMsContentsTableRow from './PushMsContentsTableRow';
-import todayContents from './fakeData';
+import PushMsContentsTableHeader from "./PushMsContentsTableHeader";
+import PushMsContentsTableRow from "./PushMsContentsTableRow";
+import todayContents from "./fakeData";
 
 function PushMsContentsTable() {
   return (
