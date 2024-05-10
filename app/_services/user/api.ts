@@ -2,7 +2,7 @@ import BASE_API_URL from "../../_constants/base.api.url";
 
 const userAPI = {
   getUserInfoAPI: async function () {
-    const response = await fetch(`${BASE_API_URL}/admin`, {
+    const response = await fetch(`${BASE_API_URL}/admin/`, {
       method: "GET",
     });
 
@@ -11,7 +11,7 @@ const userAPI = {
   },
 
   loginAPI: async function (LoginInputValues: LoginInputValues) {
-    const response = await fetch(`${BASE_API_URL}/admin/login`, {
+    const response = await fetch(`${BASE_API_URL}/admin/login/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
