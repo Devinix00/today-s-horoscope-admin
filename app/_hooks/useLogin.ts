@@ -3,9 +3,11 @@ import userAPI from "../_services/user/api";
 import LOGIN_RES from "../(login)/constants";
 import routes from "../_constants/routes";
 import { useRouter } from "next/navigation";
+import useLoggedInStore from "../_stores/useLoggedInStore";
 
 function useLogin() {
   const router = useRouter();
+  const { setLoggedIn } = useLoggedInStore();
   const { register, handleSubmit } = useForm<LoginInputValues>();
   const onSubmit: SubmitHandler<LoginInputValues> = async (
     LoginInputValues: LoginInputValues
@@ -14,6 +16,7 @@ function useLogin() {
 
     switch (response.data.message) {
       case LOGIN_RES.SUCCESS:
+        setLoggedIn(true);
         router.push(routes.HOME);
         return;
 
