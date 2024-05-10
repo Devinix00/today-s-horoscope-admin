@@ -15,7 +15,6 @@ const useLoggedInStore = create(
     {
       name: "storage",
       storage: createJSONStorage(() => sessionStorage),
-      skipHydration: true,
     }
   )
 );

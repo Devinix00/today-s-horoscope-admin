@@ -1,11 +1,18 @@
-import React from 'react';
-import Sidebar from '../_components/sidebar/Sidebar';
+import React from "react";
+import Sidebar from "../_components/sidebar/Sidebar";
+import RedirectContainer from "../_components/redirectContainer/RedirectContainer";
 
-export default function WithSidebarLayout({ children }: { children: React.ReactNode }) {
+export default function WithSidebarLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div className="flex">
-      <Sidebar />
-      {children}
-    </div>
+    <RedirectContainer>
+      <div className="flex">
+        <Sidebar />
+        {children}
+      </div>
+    </RedirectContainer>
   );
 }
