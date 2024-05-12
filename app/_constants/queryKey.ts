@@ -24,6 +24,11 @@ export const QUERY_KEYS = {
       all: () => ["star-prompt"],
       detail: (id: number) => ["star-prompt", id],
     },
+
+    mbti: {
+      all: () => ["mbti-prompt"],
+      detail: (id: number) => ["mbti-prompt", id],
+    },
   },
 
   contents: {

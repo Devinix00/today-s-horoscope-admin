@@ -1,15 +1,14 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import TableCell from "../../../../../_components/table/TableCell";
-import { Mbti } from "./fakeData";
 import TableButton from "../../../../../_components/table/TableButton";
 
 interface MbtiContentsTableRowProps {
-  mbti: Mbti;
+  mbti: Contents;
 }
 
 function MbtiContentsTableRow({ mbti }: MbtiContentsTableRowProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [value, setValue] = useState(mbti.contents);
+  const [value, setValue] = useState(mbti?.luck_msg);
   const [isClickedButton, setIsClickedButton] = useState(false);
 
   const handleClickButton = () => {
@@ -21,7 +20,7 @@ function MbtiContentsTableRow({ mbti }: MbtiContentsTableRowProps) {
 
   return (
     <tr>
-      <TableCell>{mbti.mbti}</TableCell>
+      <TableCell size="sm">{mbti?.attribute1}</TableCell>
       <TableCell textLeft>
         {isClickedButton ? (
           <textarea
@@ -33,7 +32,7 @@ function MbtiContentsTableRow({ mbti }: MbtiContentsTableRowProps) {
             className="w-full h-[60px] px-2 py-1 resize-none"
           />
         ) : (
-          mbti.contents
+          mbti?.luck_msg
         )}
       </TableCell>
       <TableCell size="sm">

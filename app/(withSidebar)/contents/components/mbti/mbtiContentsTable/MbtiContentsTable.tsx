@@ -1,14 +1,17 @@
 import MbtiContentsTableHeader from "./MbtiContentsTableHeader";
 import MbtiContentsTableRow from "./MbtiContentsTableRow";
-import mbtiData from "./fakeData";
 
-function MbtiContentsTable() {
+interface MbtiContentsTableProps {
+  mbtiContents: Contents[];
+}
+
+function MbtiContentsTable({ mbtiContents }: MbtiContentsTableProps) {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full leading-normal">
         <MbtiContentsTableHeader />
         <tbody>
-          {mbtiData.map((mbti, i) => (
+          {mbtiContents?.map((mbti, i) => (
             <MbtiContentsTableRow mbti={mbti} key={i} />
           ))}
         </tbody>

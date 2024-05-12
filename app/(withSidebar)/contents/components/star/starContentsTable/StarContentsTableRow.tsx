@@ -20,7 +20,7 @@ function StarContentsTableRow({ star }: StarContentsTableRowProps) {
   return (
     <tr>
       <TableCell size="sm">{star?.attribute1}</TableCell>
-      <TableCell>{star?.luck_date}</TableCell>
+      <TableCell size="sm">{star?.luck_date}</TableCell>
       <TableCell textLeft>
         {isClickedButton ? (
           <textarea
