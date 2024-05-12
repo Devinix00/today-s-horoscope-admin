@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import TableCell from "../table/TableCell";
 import TableButton from "../table/TableButton";
-import pushMsPrompt from "../../(withSidebar)/push-message/components/pushMsDB/pushMsTable/pushMsPromptTable/fakeData";
+import dayjs from "dayjs";
 
 interface PromptTableRowProps {
   setIsClickedHistoryButton: Dispatch<SetStateAction<boolean>>;
@@ -21,8 +21,10 @@ function PromptTableRow({
   const editTextareaRef = useRef<HTMLTextAreaElement>(null);
   const [isClickedEditButton, setIsClickedEditButton] = useState(false);
   const [editTextareaValue, setEditTextareaValue] = useState(
-    promptData.prompt_msg
+    promptData?.prompt_msg
   );
+
+  const formattedDate = dayjs(promptData?.last_date).format("MM/DD");
 
   const handleClickEditButton = () => {
     setIsClickedEditButton(!isClickedEditButton);
@@ -34,7 +36,7 @@ function PromptTableRow({
   return (
     <React.Fragment>
       <tr>
-        <TableCell size="sm">{pushMsPrompt.date}</TableCell>
+        <TableCell size="sm">{formattedDate}</TableCell>
         <TableCell size="lg" textLeft>
           {isClickedEditButton ? (
             <textarea

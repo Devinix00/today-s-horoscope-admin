@@ -7,15 +7,24 @@ import PromptTable from "../../../../_components/promptTable/PromptTable";
 import ContentsForm from "../../../../_components/contentsForm/ContentsForm";
 import PushMsContentsTable from "./pushMsTable/pushMsContentsTable/PushMsContentsTable";
 import { useQuery } from "@tanstack/react-query";
-import todayPromptAPI from "../../../../_services/prompt/today/api";
 import { QUERY_KEYS } from "../../../../_constants/queryKey";
+import promptAPI from "../../../../_services/prompt/api";
 
 function PushMsDB() {
-  const { data } = useQuery({
+  const { data: promptData } = useQuery({
     queryKey: QUERY_KEYS.prompt.today.all(),
-    queryFn: () => todayPromptAPI.getTodayPromptAPI(),
+    queryFn: () => promptAPI.today.getPrompt(),
   });
-  const todayPrompt: Prompt = data?.data;
+
+  const { data: promptHistoryData } = useQuery({
+    queryKey: QUERY_KEYS.prompt.history.detail("today"),
+    queryFn: () => promptAPI.getHistory("today"),
+  });
+
+  const todayPrompt: Prompt = promptData?.data;
+  const promptHistory: Prompt = promptHistoryData?.data;
+
+  console.log(promptHistory);
 
   const [isClickedHistoryButton, setIsClickedHistoryButton] = useState(false);
   const totalItems = 540;
