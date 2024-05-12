@@ -7,7 +7,7 @@ import PushMsDB from "../../../(withSidebar)/push-message/components/pushMsDB/Pu
 export default async function HydratedTodayHistory() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: QUERY_KEYS.prompt.history.detail("today"),
+    queryKey: QUERY_KEYS.prompt.history.all("today"),
     queryFn: () => promptAPI.getHistory("today"),
   });
   const dehydratedState = dehydrate(queryClient);
