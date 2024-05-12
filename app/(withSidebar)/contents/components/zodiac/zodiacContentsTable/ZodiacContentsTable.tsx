@@ -3,7 +3,11 @@ import ZodiacContentsTableHeader from "./ZodiacContentsTableHeader";
 import ZodiacContentsTableRow from "./ZodiacContentsTableRow";
 import zodiacData from "./fakeData";
 
-function ZodiacContentsTable() {
+interface ZodiacContentsTableProps {
+  zodiacContents: Contents;
+}
+
+function ZodiacContentsTable({ zodiacContents }: ZodiacContentsTableProps) {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full leading-normal">

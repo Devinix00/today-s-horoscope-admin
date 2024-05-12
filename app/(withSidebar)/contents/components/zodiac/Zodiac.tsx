@@ -37,7 +37,7 @@ function Zodiac() {
     queryFn: () => promptAPI.getPrompt("zodiac"),
   });
 
-  const { data: contents, refetch: refetchContents } = useQuery({
+  const { data: todayContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("zodiac"),
     queryFn: () => contentsAPI.getContents("zodiac", Number(date)),
   });
@@ -66,7 +66,7 @@ function Zodiac() {
             setDate,
           }}
         />
-        <ZodiacContentsTable />
+        <ZodiacContentsTable zodiacContents={todayContents?.data} />
       </section>
       {isClickedHistoryButton && (
         <PromptHistory setIsClickedHistoryButton={setIsClickedHistoryButton} />

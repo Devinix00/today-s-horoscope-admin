@@ -1,15 +1,14 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import TableCell from "../../../../../_components/table/TableCell";
-import { StarData } from "./fakeData";
 import TableButton from "../../../../../_components/table/TableButton";
 
 interface StarContentsTableRowProps {
-  star: StarData;
+  star: Contents;
 }
 
 function StarContentsTableRow({ star }: StarContentsTableRowProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [value, setValue] = useState(star.contents);
+  const [value, setValue] = useState(star?.luck_msg);
   const [isClickedButton, setisClickedButton] = useState(false);
   const handleClickButton = () => {
     setisClickedButton(!isClickedButton);
@@ -20,8 +19,8 @@ function StarContentsTableRow({ star }: StarContentsTableRowProps) {
 
   return (
     <tr>
-      <TableCell size="sm">{star.star}</TableCell>
-      <TableCell>{star.period}</TableCell>
+      <TableCell size="sm">{star?.attribute1}</TableCell>
+      <TableCell>{star?.luck_date}</TableCell>
       <TableCell textLeft>
         {isClickedButton ? (
           <textarea
@@ -33,7 +32,7 @@ function StarContentsTableRow({ star }: StarContentsTableRowProps) {
             className="w-full h-[80px] px-2 py-1 resize-none"
           />
         ) : (
-          star.contents
+          star?.luck_msg
         )}
       </TableCell>
       <TableCell size="sm">

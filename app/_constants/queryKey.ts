@@ -19,6 +19,11 @@ export const QUERY_KEYS = {
       all: () => ["zodiac-prompt"],
       detail: (id: number) => ["zodiac-prompt", id],
     },
+
+    star: {
+      all: () => ["star-prompt"],
+      detail: (id: number) => ["star-prompt", id],
+    },
   },
 
   contents: {
