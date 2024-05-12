@@ -11,13 +11,17 @@ import pushMsPrompt from "../../(withSidebar)/push-message/components/pushMsDB/p
 
 interface PromptTableRowProps {
   setIsClickedHistoryButton: Dispatch<SetStateAction<boolean>>;
+  promptData: Prompt;
 }
 
-function PromptTableRow({ setIsClickedHistoryButton }: PromptTableRowProps) {
+function PromptTableRow({
+  setIsClickedHistoryButton,
+  promptData,
+}: PromptTableRowProps) {
   const editTextareaRef = useRef<HTMLTextAreaElement>(null);
   const [isClickedEditButton, setIsClickedEditButton] = useState(false);
   const [editTextareaValue, setEditTextareaValue] = useState(
-    pushMsPrompt.prompt
+    promptData.prompt_msg
   );
 
   const handleClickEditButton = () => {
@@ -43,7 +47,7 @@ function PromptTableRow({ setIsClickedHistoryButton }: PromptTableRowProps) {
               className="w-full h-[240px] resize-none"
             />
           ) : (
-            pushMsPrompt.prompt
+            promptData?.prompt_msg
           )}
         </TableCell>
         <TableCell size="sm">

@@ -6,8 +6,17 @@ import PromptHistory from "../../../../_components/promptHistory/PromptHistory";
 import PromptTable from "../../../../_components/promptTable/PromptTable";
 import ContentsForm from "../../../../_components/contentsForm/ContentsForm";
 import PushMsContentsTable from "./pushMsTable/pushMsContentsTable/PushMsContentsTable";
+import { useQuery } from "@tanstack/react-query";
+import todayPromptAPI from "../../../../_services/prompt/today/api";
+import { QUERY_KEYS } from "../../../../_constants/queryKey";
 
 function PushMsDB() {
+  const { data } = useQuery({
+    queryKey: QUERY_KEYS.prompt.today.all(),
+    queryFn: () => todayPromptAPI.getTodayPromptAPI(),
+  });
+  const todayPrompt: Prompt = data?.data;
+
   const [isClickedHistoryButton, setIsClickedHistoryButton] = useState(false);
   const totalItems = 540;
   const itemsPerPage = 7;
@@ -29,7 +38,10 @@ function PushMsDB() {
     <div className="relative">
       <section className="mt-10">
         <ContentTitle title="프롬프트 관리" />
-        <PromptTable setIsClickedHistoryButton={setIsClickedHistoryButton} />
+        <PromptTable
+          setIsClickedHistoryButton={setIsClickedHistoryButton}
+          promptData={todayPrompt}
+        />
       </section>
       <section className="mt-10">
         <ContentTitle title="생성 콘텐츠" />
