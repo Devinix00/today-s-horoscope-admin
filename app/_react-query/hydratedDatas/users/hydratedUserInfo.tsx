@@ -1,8 +1,8 @@
 import { dehydrate, Hydrate } from "@tanstack/react-query";
-import getQueryClient from "../getQueryClient";
-import { QUERY_KEYS } from "../../_constants/queryKey";
-import userAPI from "../../_services/user/api";
-import AdminTable from "../../(withSidebar)/admin/components/AdminTable";
+import getQueryClient from "../../getQueryClient";
+import { QUERY_KEYS } from "../../../_constants/queryKey";
+import userAPI from "../../../_services/user/api";
+import AdminTable from "../../../(withSidebar)/admin/components/AdminTable";
 
 export default async function HydratedUserInfo() {
   const queryClient = getQueryClient();

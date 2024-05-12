@@ -1,20 +1,20 @@
 import { dehydrate, Hydrate } from "@tanstack/react-query";
 import getQueryClient from "../../getQueryClient";
 import { QUERY_KEYS } from "../../../_constants/queryKey";
-import PushMsDB from "../../../(withSidebar)/push-message/components/pushMsDB/PushMsDB";
 import promptAPI from "../../../_services/prompt/api";
+import Mbti from "../../../(withSidebar)/contents/components/mbti/Mbti";
 
-export default async function HydratedTodayPrompt() {
+export default async function HydratedMbtiPrompt() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: QUERY_KEYS.prompt.today.all(),
-    queryFn: () => promptAPI.getPrompt("today"),
+    queryKey: QUERY_KEYS.prompt.mbti.all(),
+    queryFn: () => promptAPI.getPrompt("mbti"),
   });
   const dehydratedState = dehydrate(queryClient);
 
   return (
     <Hydrate state={dehydratedState}>
-      <PushMsDB />
+      <Mbti />
     </Hydrate>
   );
 }
