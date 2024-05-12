@@ -32,24 +32,20 @@ function PushMsDB() {
     itemsPerPage,
   });
 
-  const { data: promptData } = useQuery({
+  const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.today.all(),
-    queryFn: () => promptAPI.today.getPrompt(),
+    queryFn: () => promptAPI.getPrompt("today"),
   });
 
-  const { data: promptHistoryData } = useQuery({
-    queryKey: QUERY_KEYS.prompt.history.detail("today"),
-    queryFn: () => promptAPI.getHistory("today"),
+  const { data: promptHistory } = useQuery({
+    queryKey: QUERY_KEYS.prompt.history.all("zodiac"),
+    queryFn: () => promptAPI.getHistory("zodiac"),
   });
 
-  const { data: todayContentsData, refetch: refetchContents } = useQuery({
+  const { data: todayContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("today"),
     queryFn: () => contentsAPI.getContents("today", Number(date)),
   });
-
-  const todayPrompt: Prompt = promptData?.data;
-  const promptHistory: Prompt = promptHistoryData?.data;
-  const todayContents: Contents[] = todayContentsData?.data;
 
   useEffect(() => {
     refetchContents();
@@ -61,7 +57,7 @@ function PushMsDB() {
         <ContentTitle title="프롬프트 관리" />
         <PromptTable
           setIsClickedHistoryButton={setIsClickedHistoryButton}
-          promptData={todayPrompt}
+          promptData={prompt?.data}
         />
       </section>
       <section className="mt-10">
@@ -81,7 +77,7 @@ function PushMsDB() {
           }}
         />
 
-        <PushMsContentsTable todayContents={todayContents} />
+        <PushMsContentsTable todayContents={todayContents?.data} />
       </section>
       {isClickedHistoryButton && (
         <PromptHistory setIsClickedHistoryButton={setIsClickedHistoryButton} />

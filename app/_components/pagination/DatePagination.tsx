@@ -33,7 +33,7 @@ function DatePagination({
         <Image src={PrevArrow} alt="prev-arrow" className="min-w-4" />
       </button>
 
-      {pageDates.map((date, index) => {
+      {pageDates?.map((date, index) => {
         if (currentPage === pageNumbers[index]) {
           setDate(date);
         }

@@ -6,13 +6,18 @@ export const QUERY_KEYS = {
 
   prompt: {
     history: {
-      all: () => ["history"],
-      detail: (category: string) => ["history", category],
+      all: (category: Category) => ["history", category],
+      detail: (category: Category, id: number) => ["history", category, id],
     },
 
     today: {
       all: () => ["today-prompt"],
       detail: (id: number) => ["today-prompt", id],
+    },
+
+    zodiac: {
+      all: () => ["zodiac-prompt"],
+      detail: (id: number) => ["zodiac-prompt", id],
     },
   },
 
