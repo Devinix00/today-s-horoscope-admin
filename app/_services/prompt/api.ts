@@ -10,7 +10,7 @@ const promptAPI = {
     },
   },
 
-  getHistory: async function (category: string) {
+  getHistory: async function (category: Category) {
     const response = await fetch(`${BASE_API_URL}/prompt/${category}/history/`);
 
     const data = await response.json();

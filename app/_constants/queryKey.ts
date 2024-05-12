@@ -15,4 +15,9 @@ export const QUERY_KEYS = {
       detail: (id: number) => ["today-prompt", id],
     },
   },
+
+  contents: {
+    categoryAll: (category: Category) => [category],
+    categoryDetail: (category: Category, id: number) => [category, id],
+  },
 };
