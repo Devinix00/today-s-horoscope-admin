@@ -8,11 +8,11 @@ export default function WithSidebarLayout({
   children: React.ReactNode;
 }) {
   return (
-    <RedirectContainer>
-      <div className="flex">
-        <Sidebar />
-        {children}
-      </div>
-    </RedirectContainer>
+    // <RedirectContainer>
+    <div className="flex">
+      <Sidebar />
+      {children}
+    </div>
+    // </RedirectContainer>
   );
 }
