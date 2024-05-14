@@ -73,7 +73,10 @@ function Zodiac() {
         <ZodiacContentsTable zodiacContents={zodiacContents?.data} />
       </section>
       {isClickedHistoryButton && (
-        <PromptHistory setIsClickedHistoryButton={setIsClickedHistoryButton} />
+        <PromptHistory
+          type="zodiac"
+          setIsClickedHistoryButton={setIsClickedHistoryButton}
+        />
       )}
     </div>
   );

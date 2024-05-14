@@ -73,7 +73,10 @@ function Mbti() {
         <MbtiContentsTable mbtiContents={mbtiContents?.data} />
       </section>
       {isClickedHistoryButton && (
-        <PromptHistory setIsClickedHistoryButton={setIsClickedHistoryButton} />
+        <PromptHistory
+          type="mbti"
+          setIsClickedHistoryButton={setIsClickedHistoryButton}
+        />
       )}
     </div>
   );

@@ -5,7 +5,7 @@ import TableButton from "../../table/TableButton";
 import React from "react";
 
 interface PromptHistoryTableRowProps {
-  history: History;
+  history: PromptMessage;
 }
 
 function PromptHistoryTableRow({ history }: PromptHistoryTableRowProps) {

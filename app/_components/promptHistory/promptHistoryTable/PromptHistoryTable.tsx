@@ -4,7 +4,7 @@ import PromptHistoryTableHeader from "./PromptHistoryTableHeader";
 
 interface PromptHistoryTableProps {
   setIsClickedHistoryButton: Dispatch<SetStateAction<boolean>>;
-  history: History[];
+  history: PromptMessage[];
 }
 
 function PromptHistoryTable({

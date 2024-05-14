@@ -73,7 +73,10 @@ function Star() {
         <StarContentsTable starContents={starContents?.data} />
       </section>
       {isClickedHistoryButton && (
-        <PromptHistory setIsClickedHistoryButton={setIsClickedHistoryButton} />
+        <PromptHistory
+          type="star"
+          setIsClickedHistoryButton={setIsClickedHistoryButton}
+        />
       )}
     </div>
   );
