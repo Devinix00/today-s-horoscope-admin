@@ -11,8 +11,10 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import contentsAPI from "../../../../_services/contents/api";
 import promptAPI from "../../../../_services/prompt/api";
+import useScrollToTop from "../../../../_hooks/useScrollToTop";
 
 function Zodiac() {
+  const { isVisible, scrollToTop } = useScrollToTop();
   const today = dayjs().format("YYYYMMDD");
   const [date, setDate] = useState(today);
   const [isClickedHistoryButton, setIsClickedHistoryButton] = useState(false);
@@ -77,6 +79,14 @@ function Zodiac() {
           type="zodiac"
           setIsClickedHistoryButton={setIsClickedHistoryButton}
         />
+      )}
+      {isVisible && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-16 right-16 p-5 shadow-md shadow-gray-800 bg-blue-500 text-white rounded-full text-sm cursor-pointer hover:bg-blue-700"
+        >
+          위로
+        </button>
       )}
     </div>
   );
