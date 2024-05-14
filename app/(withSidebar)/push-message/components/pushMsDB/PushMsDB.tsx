@@ -80,7 +80,10 @@ function PushMsDB() {
         <PushMsContentsTable todayContents={todayContents?.data} />
       </section>
       {isClickedHistoryButton && (
-        <PromptHistory setIsClickedHistoryButton={setIsClickedHistoryButton} />
+        <PromptHistory
+          setIsClickedHistoryButton={setIsClickedHistoryButton}
+          history={promptHistory?.data}
+        />
       )}
     </div>
   );
