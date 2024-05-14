@@ -9,12 +9,17 @@ interface Prompt {
   last_date: string;
 }
 
-interface History {
+interface PromptMessage {
   gpt_id: number;
-  category: Category;
+  category: string;
   prompt_msg_name: string;
   prompt_msg: string;
   create_date: string;
   last_date: string;
   admins_id: number;
+}
+
+interface History {
+  total: number;
+  prompt_msgs: PromptMessage[];
 }

@@ -37,11 +37,6 @@ function PushMsDB() {
     queryFn: () => promptAPI.getPrompt("today"),
   });
 
-  const { data: promptHistory } = useQuery({
-    queryKey: QUERY_KEYS.prompt.history.all("zodiac"),
-    queryFn: () => promptAPI.getHistory("zodiac"),
-  });
-
   const { data: todayContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("today"),
     queryFn: () => contentsAPI.getContents("today", Number(date)),
@@ -81,8 +76,8 @@ function PushMsDB() {
       </section>
       {isClickedHistoryButton && (
         <PromptHistory
+          type="today"
           setIsClickedHistoryButton={setIsClickedHistoryButton}
-          history={promptHistory?.data}
         />
       )}
     </div>
