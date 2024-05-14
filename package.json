@@ -18,7 +18,6 @@
     "react-hook-form": "^7.51.4",
     "react-native-web": "^0.19.10",
     "react-spinner": "^0.2.7",
-    "react-toastify": "^10.0.5",
     "zustand": "^4.5.2",
     "zustand-persist": "^0.4.0"
   },

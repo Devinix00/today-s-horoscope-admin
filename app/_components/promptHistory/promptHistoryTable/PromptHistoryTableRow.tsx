@@ -1,6 +1,5 @@
 "use client";
 
-import { ToastContainer, toast } from "react-toastify";
 import TableCell from "../../../_components/table/TableCell";
 import TableButton from "../../table/TableButton";
 import React from "react";
@@ -13,9 +12,9 @@ function PromptHistoryTableRow({ history }: PromptHistoryTableRowProps) {
   const handleCopyClipBoard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      toast.success("히스토리가 복사되었습니다.");
+      alert("히스토리가 복사되었습니다.");
     } catch (e) {
-      toast.error("복사에 실패했습니다.");
+      alert("복사에 실패했습니다.");
     }
   };
 
@@ -35,7 +34,6 @@ function PromptHistoryTableRow({ history }: PromptHistoryTableRowProps) {
           </TableButton>
         </TableCell>
       </tr>
-      <ToastContainer />
     </React.Fragment>
   );
 }
