@@ -1,7 +1,6 @@
 import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import getFormattedDate from "../../_utils/getFormattedDate";
 import getNumericValue from "../../_utils/getNumericValue";
-import { ToastContainer, toast } from "react-toastify";
 
 interface ContentsFormProps {
   findPageFromDate: (inputDate: string) => number | null;
@@ -20,7 +19,7 @@ function ContentsForm({ findPageFromDate, setCurrentPage }: ContentsFormProps) {
     if (page) {
       setCurrentPage(page);
     } else {
-      toast.error(`해당 날짜에 대한 페이지를 찾을 수 없습니다.`);
+      alert(`해당 날짜에 대한 페이지를 찾을 수 없습니다.`);
     }
   };
 
@@ -50,7 +49,6 @@ function ContentsForm({ findPageFromDate, setCurrentPage }: ContentsFormProps) {
           </button>
         </section>
       </form>
-      <ToastContainer />
     </React.Fragment>
   );
 }

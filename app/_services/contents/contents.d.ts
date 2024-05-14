@@ -6,3 +6,13 @@ interface Contents {
   attribute2?: string;
   luck_msg: string;
 }
+
+interface ZodiacMessage {
+  attribute2: string;
+  luck_msg: string;
+}
+
+interface ZodiacContents {
+  attribute1: string;
+  messages: ZodiacMessage[];
+}

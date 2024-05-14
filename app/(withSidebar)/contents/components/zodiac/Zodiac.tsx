@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ContentTitle from "../../../../_components/contentTitle/ContentTitle";
 import DatePagination from "../../../../_components/pagination/DatePagination";
 import useDatePagination from "../../../../_hooks/useDatePagination";
@@ -37,10 +37,14 @@ function Zodiac() {
     queryFn: () => promptAPI.getPrompt("zodiac"),
   });
 
-  const { data: todayContents, refetch: refetchContents } = useQuery({
+  const { data: zodiacContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("zodiac"),
     queryFn: () => contentsAPI.getContents("zodiac", Number(date)),
   });
+
+  useEffect(() => {
+    refetchContents();
+  }, [date, refetchContents]);
 
   return (
     <div className="relative">
@@ -66,7 +70,7 @@ function Zodiac() {
             setDate,
           }}
         />
-        <ZodiacContentsTable zodiacContents={todayContents?.data} />
+        <ZodiacContentsTable zodiacContents={zodiacContents?.data} />
       </section>
       {isClickedHistoryButton && (
         <PromptHistory setIsClickedHistoryButton={setIsClickedHistoryButton} />

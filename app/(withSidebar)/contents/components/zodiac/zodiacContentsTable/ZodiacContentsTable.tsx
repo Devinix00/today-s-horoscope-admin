@@ -1,10 +1,9 @@
 import React from "react";
 import ZodiacContentsTableHeader from "./ZodiacContentsTableHeader";
 import ZodiacContentsTableRow from "./ZodiacContentsTableRow";
-import zodiacData from "./fakeData";
 
 interface ZodiacContentsTableProps {
-  zodiacContents: Contents;
+  zodiacContents: ZodiacContents[];
 }
 
 function ZodiacContentsTable({ zodiacContents }: ZodiacContentsTableProps) {
@@ -13,7 +12,7 @@ function ZodiacContentsTable({ zodiacContents }: ZodiacContentsTableProps) {
       <table className="min-w-full leading-normal">
         <ZodiacContentsTableHeader />
         <tbody>
-          {zodiacData.map((zodiac, i) => (
+          {zodiacContents?.map((zodiac, i) => (
             <ZodiacContentsTableRow zodiac={zodiac} key={i} />
           ))}
         </tbody>
