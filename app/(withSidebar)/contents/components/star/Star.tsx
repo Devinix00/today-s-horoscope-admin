@@ -51,6 +51,7 @@ function Star() {
       <section className="mt-10">
         <ContentTitle title="프롬프트 관리" />
         <PromptTable
+          category="star"
           setIsClickedHistoryButton={setIsClickedHistoryButton}
           promptData={prompt?.data}
         />

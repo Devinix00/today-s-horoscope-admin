@@ -51,6 +51,7 @@ function Mbti() {
       <section className="mt-10">
         <ContentTitle title="프롬프트 관리" />
         <PromptTable
+          category="mbti"
           setIsClickedHistoryButton={setIsClickedHistoryButton}
           promptData={prompt?.data}
         />

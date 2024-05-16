@@ -5,11 +5,13 @@ import PromptTableRow from "./PromptTableRow";
 interface PromptTableProps {
   setIsClickedHistoryButton: Dispatch<SetStateAction<boolean>>;
   promptData: Prompt;
+  category: Category;
 }
 
 function PromptTable({
   setIsClickedHistoryButton,
   promptData,
+  category,
 }: PromptTableProps) {
   return (
     <div className="overflow-x-auto">
@@ -17,6 +19,7 @@ function PromptTable({
         <PromptTableHeader />
         <tbody>
           <PromptTableRow
+            category={category}
             setIsClickedHistoryButton={setIsClickedHistoryButton}
             promptData={promptData}
           />

@@ -53,6 +53,7 @@ function Zodiac() {
       <section className="mt-10">
         <ContentTitle title="프롬프트 관리" />
         <PromptTable
+          category="zodiac"
           setIsClickedHistoryButton={setIsClickedHistoryButton}
           promptData={prompt?.data}
         />
