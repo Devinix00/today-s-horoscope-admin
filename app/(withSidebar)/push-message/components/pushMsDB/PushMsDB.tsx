@@ -5,12 +5,13 @@ import useDatePagination from "../../../../_hooks/useDatePagination";
 import PromptHistory from "../../../../_components/promptHistory/PromptHistory";
 import PromptTable from "../../../../_components/promptTable/PromptTable";
 import ContentsForm from "../../../../_components/contentsForm/ContentsForm";
-import PushMsContentsTable from "./pushMsTable/pushMsContentsTable/PushMsContentsTable";
+
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import promptAPI from "../../../../_services/prompt/api";
 import contentsAPI from "../../../../_services/contents/api";
 import dayjs from "dayjs";
+import PushMsContentsTable from "./pushMsTable/pushMsContentsTable/PushMsContentsTable";
 
 function PushMsDB() {
   const today = dayjs().format("YYYYMMDD");
