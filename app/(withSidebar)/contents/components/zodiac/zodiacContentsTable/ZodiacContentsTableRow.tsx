@@ -1,9 +1,6 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import TableCell from "../../../../../_components/table/TableCell";
 import TableButton from "../../../../../_components/table/TableButton";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import contentsAPI from "../../../../../_services/contents/api";
-import { QUERY_KEYS } from "../../../../../_constants/queryKey";
 
 interface ZodiacContentsTableRowProps {
   zodiac: ZodiacContents;
@@ -17,24 +14,7 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
     [key: number]: boolean;
   }>({});
 
-  // const queryClient = useQueryClient();
-
-  // const { mutate: editContents } = useMutation({
-  //   mutationFn: ({ id, value }: { id: number; value: string }) =>
-  //     contentsAPI.editContents({ id, value }),
-  //   onSettled: () => {
-  //     queryClient.invalidateQueries({
-  //       queryKey: QUERY_KEYS.contents.categoryAll("zodiac"),
-  //     });
-  //   },
-  // });
-
-  const handleClickButton = (
-    index: number,
-    message: string
-    // id: number,
-    // value: string
-  ) => {
+  const handleClickButton = (index: number, message: string) => {
     const newState = !isClickedButtonMap[index];
     setIsClickedButtonMap((prev) => ({ ...prev, [index]: newState }));
 
@@ -46,7 +26,6 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
         textareaRef.current?.focus();
       }, 0);
     } else {
-      // editContents({ id, value });
       setEditingIndex(null);
     }
   };
