@@ -44,7 +44,7 @@ function SidebarTab({ content, href }: SidebarTabProps) {
                   pathname === routes.PUSH_MESSAGE && "bg-blue-700"
                 } flex justify-center items-center rounded-md`}
               >
-                푸시 관리
+                푸시 발송 관리
               </Link>
 
               <Link
