@@ -2,6 +2,7 @@ import React, {
   ChangeEvent,
   Dispatch,
   SetStateAction,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -53,10 +54,11 @@ function PromptTableRow({
 
   const editTextareaRef = useRef<HTMLTextAreaElement>(null);
   const [isClickedEditButton, setIsClickedEditButton] = useState(false);
-  const [editTextareaValue, setEditTextareaValue] = useState(
-    promptData?.prompt_msg
-  );
+  const [editTextareaValue, setEditTextareaValue] = useState("");
 
+  useEffect(() => {
+    setEditTextareaValue(promptData?.prompt_msg);
+  }, [promptData]);
   const formattedDate = dayjs(promptData?.last_date).format("MM/DD");
 
   const handleClickEditButton = () => {
