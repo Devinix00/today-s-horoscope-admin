@@ -2,7 +2,7 @@ import { dehydrate, Hydrate } from "@tanstack/react-query";
 import getQueryClient from "../../getQueryClient";
 import { QUERY_KEYS } from "../../../_constants/queryKey";
 import promptAPI from "../../../_services/prompt/api";
-import Star from "../../../(withSidebar)/contents/components/star/Star";
+import Star from "../../../(withSidebar)/contents-db/components/star/Star";
 
 export default async function HydratedStarPrompt() {
   const queryClient = getQueryClient();

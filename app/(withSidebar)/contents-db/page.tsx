@@ -7,6 +7,7 @@ import useTabStore from "../../_stores/useTabStore";
 import Zodiac from "./components/zodiac/Zodiac";
 import Star from "./components/star/Star";
 import Mbti from "./components/mbti/Mbti";
+import PushMsDB from "./components/pushMsDB/PushMsDB";
 
 function Contents() {
   const { tabId } = useTabStore();
@@ -14,9 +15,10 @@ function Contents() {
   return (
     <MainContainer>
       <ContentsTabs />
-      {tabId === 1 && <Zodiac />}
-      {tabId === 2 && <Star />}
-      {tabId === 3 && <Mbti />}
+      {tabId === 1 && <PushMsDB />}
+      {tabId === 2 && <Zodiac />}
+      {tabId === 3 && <Star />}
+      {tabId === 4 && <Mbti />}
     </MainContainer>
   );
 }

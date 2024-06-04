@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import React from 'react';
-import routes from '../../_constants/routes';
-import useFunctionStore from '../../_stores/useFucntionStore';
-import { usePathname } from 'next/navigation';
+import Link from "next/link";
+import React from "react";
+import routes from "../../_constants/routes";
+import useFunctionStore from "../../_stores/useFucntionStore";
+import { usePathname } from "next/navigation";
 
 interface SidebarTabProps {
   content: TabType;
@@ -17,27 +17,52 @@ function SidebarTab({ content, href }: SidebarTabProps) {
 
   return (
     <>
-      {content === '기능 관리' ? (
+      {content === "기능 관리" ? (
         <React.Fragment>
           <button
             onClick={() => setIsOpenedFunction(!isOpenedFunction)}
-            className={`relative hover:bg-blue-700 ${pathname === routes.PUSH_MESSAGE || pathname === routes.CONTENTS || isOpenedFunction ? 'bg-blue-700' : 'bg-blue-400'} transition-colors text-white py-[10px] rounded-md`}>
+            className={`relative hover:bg-blue-700 ${
+              pathname === routes.PUSH_MESSAGE ||
+              pathname === routes.CONTENTS_SETTING ||
+              pathname === routes.CONTENTS_DB ||
+              isOpenedFunction
+                ? "bg-blue-700"
+                : "bg-blue-400"
+            } transition-colors text-white py-[10px] rounded-md`}
+          >
             {content}
-            <p className="absolute top-[50%] translate-y-[-50%] right-[12px] text-lg">{isOpenedFunction ? '-' : '+'}</p>
+            <p className="absolute top-[50%] translate-y-[-50%] right-[12px] text-lg">
+              {isOpenedFunction ? "-" : "+"}
+            </p>
           </button>
 
           {isOpenedFunction && (
             <React.Fragment>
               <Link
                 href={routes.PUSH_MESSAGE}
-                className={`bg-blue-400 text-white hover:bg-blue-700 h-[30px] ${pathname === routes.PUSH_MESSAGE && 'bg-blue-700'} flex justify-center items-center rounded-md`}>
-                푸시 메시지 관리
+                className={`bg-blue-400 text-white hover:bg-blue-700 h-[30px] ${
+                  pathname === routes.PUSH_MESSAGE && "bg-blue-700"
+                } flex justify-center items-center rounded-md`}
+              >
+                푸시 관리
               </Link>
 
               <Link
-                href={routes.CONTENTS}
-                className={`bg-blue-400 text-white hover:bg-blue-700 h-[30px] ${pathname === routes.CONTENTS && 'bg-blue-700'} flex justify-center items-center rounded-md`}>
-                콘텐츠 관리
+                href={routes.CONTENTS_SETTING}
+                className={`bg-blue-400 text-white hover:bg-blue-700 h-[30px] ${
+                  pathname === routes.CONTENTS_SETTING && "bg-blue-700"
+                } flex justify-center items-center rounded-md`}
+              >
+                콘텐츠 생성 관리
+              </Link>
+
+              <Link
+                href={routes.CONTENTS_DB}
+                className={`bg-blue-400 text-white hover:bg-blue-700 h-[30px] ${
+                  pathname === routes.CONTENTS_DB && "bg-blue-700"
+                } flex justify-center items-center rounded-md`}
+              >
+                콘텐츠 DB 관리
               </Link>
             </React.Fragment>
           )}
@@ -46,7 +71,10 @@ function SidebarTab({ content, href }: SidebarTabProps) {
         <Link
           onClick={() => setIsOpenedFunction(false)}
           href={href as string}
-          className={`bg-blue-400 hover:bg-blue-700 ${pathname === href && 'bg-blue-700'} transition-colors text-white text-center py-[10px] rounded-md`}>
+          className={`bg-blue-400 hover:bg-blue-700 ${
+            pathname === href && "bg-blue-700"
+          } transition-colors text-white text-center py-[10px] rounded-md`}
+        >
           {content}
         </Link>
       )}

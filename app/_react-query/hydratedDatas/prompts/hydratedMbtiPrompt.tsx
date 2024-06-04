@@ -2,7 +2,7 @@ import { dehydrate, Hydrate } from "@tanstack/react-query";
 import getQueryClient from "../../getQueryClient";
 import { QUERY_KEYS } from "../../../_constants/queryKey";
 import promptAPI from "../../../_services/prompt/api";
-import Mbti from "../../../(withSidebar)/contents/components/mbti/Mbti";
+import Mbti from "../../../(withSidebar)/contents-db/components/mbti/Mbti";
 
 export default async function HydratedMbtiPrompt() {
   const queryClient = getQueryClient();
