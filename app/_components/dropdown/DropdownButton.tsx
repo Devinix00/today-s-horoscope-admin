@@ -22,14 +22,13 @@ function DropdownButton({
     isOpenedDateDropdown,
   } = useDropdownStore();
 
-  const toggleDropdownButton = () => {
-    if (type === "hour") setIsOpenedHourDropdown(!isOpenedHourDropdown);
-    else if (type === "minute")
-      setIsOpenedMinuteDropdown(!isOpenedMinuteDropdown);
-    else if (type === "date") {
-      setIsOpenedDateDropdown(!isOpenedDateDropdown);
-    }
+  const toggleDropdownMap = {
+    hour: () => setIsOpenedHourDropdown(!isOpenedHourDropdown),
+    minute: () => setIsOpenedMinuteDropdown(!isOpenedMinuteDropdown),
+    date: () => setIsOpenedDateDropdown(!isOpenedDateDropdown),
   };
+
+  const toggleDropdownButton = toggleDropdownMap[type];
 
   return (
     <div

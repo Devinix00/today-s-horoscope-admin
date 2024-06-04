@@ -20,22 +20,26 @@ function DropdownItem({
     setIsOpenedDateDropdown,
   } = useDropdownStore();
 
-  const handleClickDropDownItem = () => {
-    if (type === "hour") {
+  const clickDropdownItemMap = {
+    hour: () => {
       setHourDropdownItem(time);
       setIsOpenedHourDropdown(false);
-    } else if (type === "minute") {
+    },
+    minute: () => {
       setMinuteDropdownItem(time);
       setIsOpenedMinuteDropdown(false);
-    } else {
+    },
+    date: () => {
       setDateDropdownItem(time);
       setIsOpenedDateDropdown(false);
-    }
+    },
   };
+
+  const handleClickDropdownItem = clickDropdownItemMap[type];
 
   return (
     <li
-      onClick={handleClickDropDownItem}
+      onClick={handleClickDropdownItem}
       className="px-4 hover:underline cursor-pointer select-none"
     >
       {children}

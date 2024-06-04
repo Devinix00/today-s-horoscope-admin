@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 interface LoginInputProps {

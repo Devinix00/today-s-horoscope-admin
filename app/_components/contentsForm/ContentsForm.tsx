@@ -10,7 +10,7 @@ interface ContentsFormProps {
 function ContentsForm({ findPageFromDate, setCurrentPage }: ContentsFormProps) {
   const [inputValue, setInputValue] = useState("");
   const { yearMonthDay } = getFormattedDate();
-  const { handleChange } = getNumericValue(setInputValue);
+  const handleChange = getNumericValue(setInputValue);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

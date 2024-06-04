@@ -5,6 +5,7 @@ import { Dropdown } from "../../../../_images";
 import DropdownList from "../../../../_components/dropdown/DropdownList";
 import DropdownItems from "../../../../_components/dropdown/DropdownItems";
 import useDropdownStore from "../../../../_stores/useDropdownStore";
+import useResetDropdown from "../../../../_hooks/useResetDropdown";
 
 function AutoDateSetting() {
   const {
@@ -15,6 +16,8 @@ function AutoDateSetting() {
     minuteDropdownItem,
     dateDropdownItem,
   } = useDropdownStore();
+
+  useResetDropdown();
 
   return (
     <React.Fragment>
