@@ -23,9 +23,20 @@ function Home() {
           <ShortcutsLink href={routes.STATISTICS} />
         </HomeContent>
         <HomeContent title="기능 관리">
-          <li>푸시메시지 발송시간과 프롬프트 및 내용 관리</li>
-          <li>콘텐츠(운세) 프롬프트 및 내용 관리</li>
-          <ShortcutsButton />
+          <div className="flex flex-col justify-between">
+            <li className="pb-2 border-b-2 flex items-center justify-between">
+              <p>푸시메시지 발송시간 관리</p>
+              <ShortcutsButton type={routes.PUSH_MESSAGE} />
+            </li>
+            <li className="py-2 border-b-2 flex items-center justify-between">
+              <p>콘텐츠 생성 관리</p>
+              <ShortcutsButton type={routes.CONTENTS_SETTING} />
+            </li>
+            <li className="py-2 flex items-center justify-between">
+              <p>콘텐츠 프롬프트 관리 및 수정</p>
+              <ShortcutsButton type={routes.CONTENTS_DB} />
+            </li>
+          </div>
         </HomeContent>
       </div>
     </MainContainer>
