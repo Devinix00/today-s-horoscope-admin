@@ -25,14 +25,14 @@ function AdminTableRow({ adminUser }: AdminTableRowProps) {
       <TableCell>{adminUser.admin_user}</TableCell>
       <TableCell>{adminUser.cell_num}</TableCell>
       <TableCell>{formattedCreatedDate}</TableCell>
-      <TableCell>
+      {/* <TableCell>
         <TableButton
           onClick={handleClickButton}
           isClickedButton={isClickedButton}
         >
           {isClickedButton ? "저장" : "수정"}
         </TableButton>
-      </TableCell>
+      </TableCell> */}
     </tr>
   );
 }
