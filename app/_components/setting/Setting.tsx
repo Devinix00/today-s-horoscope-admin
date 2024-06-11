@@ -4,9 +4,14 @@ import { PropsWithChildren } from "react";
 
 interface SettingProps {
   settingHeader: string;
+  settingFooterText?: string;
 }
 
-function Setting({ settingHeader, children }: PropsWithChildren<SettingProps>) {
+function Setting({
+  settingHeader,
+  settingFooterText,
+  children,
+}: PropsWithChildren<SettingProps>) {
   return (
     <form className="mt-10 w-[500px]">
       <h2 className="w-full bg-gray-400 text-white px-4 py-2 font-semibold">
@@ -17,6 +22,7 @@ function Setting({ settingHeader, children }: PropsWithChildren<SettingProps>) {
       </section>
 
       <section className="w-full h-10 bg-gray-200 flex justify-end items-center ">
+        <p className="mr-auto pl-4">{settingFooterText}</p>
         <button className="w-20 h-fit py-[2.5px] mr-1 rounded-md bg-blue-500 text-white">
           적용
         </button>

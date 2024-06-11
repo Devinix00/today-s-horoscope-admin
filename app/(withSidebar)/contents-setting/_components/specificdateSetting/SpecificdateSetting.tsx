@@ -9,7 +9,10 @@ function SpecificdateSetting() {
 
   return (
     <React.Fragment>
-      <Setting settingHeader={"특정일 콘텐츠 생성"}>
+      <Setting
+        settingHeader={"특정일 콘텐츠 생성"}
+        settingFooterText="콘텐츠 생성 시 약 5분에서 7분정도가 소요됩니다."
+      >
         <section className="flex gap-2 items-center">
           <DropdownInput inputValue={inputValue} handleChange={handleChange} />
           <p>콘텐츠를 생성합니다.</p>
