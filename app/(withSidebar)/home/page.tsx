@@ -1,14 +1,18 @@
-import React from 'react';
-import HomeContent from './_components/HomeContent';
-import ShortcutsLink from './_components/ShortcutsLink';
-import routes from '../../_constants/routes';
-import ShortcutsButton from './_components/ShortcutsButton';
-import MainContainer from '../../_components/mainContainer/MainContainer';
+import React from "react";
+import HomeContent from "./_components/HomeContent";
+import ShortcutsLink from "./_components/ShortcutsLink";
+import routes from "../../_constants/routes";
+import ShortcutsButton from "./_components/ShortcutsButton";
+import MainContainer from "../../_components/mainContainer/MainContainer";
 
 function Home() {
   return (
     <MainContainer>
       <div className="grid grid-cols-2 gap-14">
+        <HomeContent title="콘텐츠 생성 현황">
+          <li>2024/08/15 생성 완료</li>
+          <ShortcutsLink type={routes.CONTENTS_DB} href={routes.CONTENTS_DB} />
+        </HomeContent>
         <HomeContent title="관리자 설정">
           <li>관리자 관리 및 정보 수정</li>
           <ShortcutsLink href={routes.ADMIN} />
