@@ -10,13 +10,16 @@ const userAPI = {
     return { data, response };
   },
 
-  loginAPI: async function (LoginInputValues: LoginInputValues) {
+  loginAPI: async function (loginInputValues: LoginInputValues) {
     const response = await fetch(`${BASE_API_URL}/admin/login/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(LoginInputValues),
+      body: JSON.stringify({
+        username: loginInputValues.admin_id,
+        password: loginInputValues.admin_pw,
+      }),
     });
 
     const data = await response.json();
