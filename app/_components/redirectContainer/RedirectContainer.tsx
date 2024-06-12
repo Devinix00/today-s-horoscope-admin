@@ -11,7 +11,7 @@ function RedirectContainer({ children }: PropsWithChildren) {
 
   useEffect(() => {
     if (!loggedIn) router.push(routes.LOGIN);
-  }, []);
+  }, [loggedIn, router]);
 
   return <React.Fragment>{children}</React.Fragment>;
 }

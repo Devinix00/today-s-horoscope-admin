@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import Sidebar from "../_components/sidebar/Sidebar";
 import RedirectContainer from "../_components/redirectContainer/RedirectContainer";
 
@@ -10,11 +9,11 @@ export default function WithSidebarLayout({
   children: React.ReactNode;
 }) {
   return (
-    // <RedirectContainer>
-    <div className="flex">
-      <Sidebar />
-      {children}
-    </div>
-    // </RedirectContainer>
+    <RedirectContainer>
+      <div className="flex">
+        <Sidebar />
+        {children}
+      </div>
+    </RedirectContainer>
   );
 }
