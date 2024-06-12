@@ -35,4 +35,9 @@ export const QUERY_KEYS = {
     categoryAll: (category: Category) => [category],
     categoryDetail: (category: Category, id: number) => [category, id],
   },
+
+  adms: {
+    push: () => ["push"],
+    terms: () => ["terms"],
+  },
 };

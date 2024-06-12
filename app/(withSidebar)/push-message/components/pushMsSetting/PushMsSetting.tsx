@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Setting from "../../../../_components/setting/Setting";
 import DropdownButton from "../../../../_components/dropdown/DropdownButton";
 import Image from "next/image";
@@ -7,6 +7,10 @@ import DropdownList from "../../../../_components/dropdown/DropdownList";
 import DropdownItems from "../../../../_components/dropdown/DropdownItems";
 import useDropdownStore from "../../../../_stores/useDropdownStore";
 import useResetDropdown from "../../../../_hooks/useResetDropdown";
+import { useQuery } from "@tanstack/react-query";
+import admsAPI from "../../../../_services/adms/api";
+import { QUERY_KEYS } from "../../../../_constants/queryKey";
+import getFormattedSettings from "../../../../_utils/getFormattedSettings";
 
 function PushMsSetting() {
   const {
@@ -14,9 +18,26 @@ function PushMsSetting() {
     isOpenedMinuteDropdown,
     hourDropdownItem,
     minuteDropdownItem,
+    setHourDropdownItem,
+    setMinuteDropdownItem,
   } = useDropdownStore();
-
   useResetDropdown();
+
+  const accessToken = localStorage.getItem("access-token");
+
+  const { data } = useQuery({
+    queryKey: QUERY_KEYS.adms.push(),
+    queryFn: () => admsAPI.getAdms("push", accessToken),
+  });
+
+  const pushTime: string = data?.data.push_time;
+  const { formattedData: hour } = getFormattedSettings(pushTime?.slice(0, 2));
+  const { formattedData: minute } = getFormattedSettings(pushTime?.slice(2, 4));
+
+  useEffect(() => {
+    setHourDropdownItem(Number(hour));
+    setMinuteDropdownItem(Number(minute));
+  }, [hour, minute, setHourDropdownItem, setMinuteDropdownItem]);
 
   return (
     <Setting settingHeader="발송 시간 설정">
