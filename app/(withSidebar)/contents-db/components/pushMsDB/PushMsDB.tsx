@@ -17,8 +17,8 @@ function PushMsDB() {
   const today = dayjs().format("YYYYMMDD");
   const [date, setDate] = useState(today);
   const [isClickedHistoryButton, setIsClickedHistoryButton] = useState(false);
-  const totalItems = 540;
-  const itemsPerPage = 7;
+  const totalItems = 180;
+  const itemsPerPage = 1;
   const {
     currentPage,
     handleNext,

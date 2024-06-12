@@ -66,8 +66,8 @@ function PushMsSetting() {
 
     mutateAddPushMsSetting();
 
-    if (!mutateData.response.ok) {
-      alert(mutateData.data.Error);
+    if (!mutateData?.response.ok) {
+      alert(mutateData.data?.Error);
     }
   };
 

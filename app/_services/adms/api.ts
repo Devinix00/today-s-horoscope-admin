@@ -16,6 +16,7 @@ const admsAPI = {
     const response = await fetch(`${BASE_API_URL}/adms/push/`, {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
