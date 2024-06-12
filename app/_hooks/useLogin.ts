@@ -11,8 +11,7 @@ function useLogin() {
   const onSubmit: SubmitHandler<LoginInputValues> = async (
     LoginInputValues: LoginInputValues
   ) => {
-    const accessToken = localStorage.getItem("access-token");
-    const response = await userAPI.loginAPI(LoginInputValues, accessToken);
+    const response = await userAPI.loginAPI(LoginInputValues);
 
     if (response.response.ok) {
       const { access, refresh } = response.data;
