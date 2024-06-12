@@ -1,24 +1,28 @@
 import React from "react";
-import DropdownButton from "../../../../_components/dropdown/DropdownButton";
+
 import Image from "next/image";
-import { Dropdown } from "../../../../_images";
-import DropdownList from "../../../../_components/dropdown/DropdownList";
-import DropdownItems from "../../../../_components/dropdown/DropdownItems";
-import useDropdownStore from "../../../../_stores/useDropdownStore";
-import useResetDropdown from "../../../../_hooks/useResetDropdown";
+import DropdownButton from "../../../../../_components/dropdown/DropdownButton";
+import { Dropdown } from "../../../../../_images";
+import DropdownList from "../../../../../_components/dropdown/DropdownList";
+import DropdownItems from "../../../../../_components/dropdown/DropdownItems";
 
-function AutoDateSetting() {
-  const {
-    isOpenedHourDropdown,
-    isOpenedMinuteDropdown,
-    isOpenedDateDropdown,
-    hourDropdownItem,
-    minuteDropdownItem,
-    dateDropdownItem,
-  } = useDropdownStore();
+interface AutoDateSettingProps {
+  hourDropdownItem: number;
+  minuteDropdownItem: number;
+  dateDropdownItem: number;
+  isOpenedHourDropdown: boolean;
+  isOpenedMinuteDropdown: boolean;
+  isOpenedDateDropdown: boolean;
+}
 
-  useResetDropdown();
-
+function AutoDateSetting({
+  hourDropdownItem,
+  minuteDropdownItem,
+  isOpenedHourDropdown,
+  isOpenedMinuteDropdown,
+  dateDropdownItem,
+  isOpenedDateDropdown,
+}: AutoDateSettingProps) {
   return (
     <React.Fragment>
       <section className="flex flex-col gap-2 items-center">

@@ -1,14 +1,11 @@
-import React from "react";
 import Setting from "../../../../_components/setting/Setting";
-import AutoDateSetting from "./AutoDateSetting";
 import InitialPeriodSetting from "./InitialPeriodSetting";
+import AutoDateSettingContainer from "./autoDateSettingContainer/AutoDateSettingContainer";
 
 function CreationDateSetting() {
   return (
     <div>
-      <Setting settingHeader="콘텐츠 자동 생성일 설정">
-        <AutoDateSetting />
-      </Setting>
+      <AutoDateSettingContainer />
       <Setting settingHeader="최초 콘텐츠 생성 기간 설정">
         <InitialPeriodSetting />
       </Setting>

@@ -5,7 +5,7 @@ import { PropsWithChildren } from "react";
 interface SettingProps {
   settingHeader: string;
   settingFooterText?: string;
-  onClick: any;
+  onClick?: any;
 }
 
 function Setting({

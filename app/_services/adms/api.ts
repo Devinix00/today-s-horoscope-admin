@@ -43,6 +43,27 @@ const admsAPI = {
     const data = await response.json();
     return { data, response };
   },
+
+  addAdmsTerms: async (
+    term_date: string,
+    term_time: string,
+    accessToken: string
+  ) => {
+    const response = await fetch(`${BASE_API_URL}/adms/terms/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({
+        term_date: term_date,
+        term_time: term_time,
+      }),
+    });
+
+    const data = await response.json();
+    return { data, response };
+  },
 };
 
 export default admsAPI;
