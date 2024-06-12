@@ -32,15 +32,16 @@ function PushMsDB() {
     totalItems,
     itemsPerPage,
   });
+  const accessToken = localStorage.getItem("access-token");
 
   const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.today.all(),
-    queryFn: () => promptAPI.getPrompt("today"),
+    queryFn: () => promptAPI.getPrompt("today", accessToken),
   });
 
   const { data: todayContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("today"),
-    queryFn: () => contentsAPI.getContents("today", Number(date)),
+    queryFn: () => contentsAPI.getContents("today", Number(date), accessToken),
   });
 
   useEffect(() => {

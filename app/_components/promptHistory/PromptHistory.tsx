@@ -17,9 +17,10 @@ function PromptHistory({
   setIsClickedHistoryButton,
 }: PromptHistoryProps) {
   const [currentPage, setCurrentPage] = useState(1);
+  const accessToken = localStorage.getItem("access-token");
   const { data: history, refetch: refetchHistory } = useQuery({
     queryKey: QUERY_KEYS.prompt.history.all(type),
-    queryFn: () => promptAPI.getHistory(type, currentPage),
+    queryFn: () => promptAPI.getHistory(type, currentPage, accessToken),
   });
   const totalItems = history?.data.total;
   const itemsPerPage = 4;

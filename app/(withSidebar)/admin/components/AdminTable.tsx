@@ -9,9 +9,10 @@ import { QUERY_KEYS } from "../../../_constants/queryKey";
 import userAPI from "../../../_services/user/api";
 
 function AdminTable() {
+  const accessToken = localStorage.getItem("access-token");
   const { data } = useQuery({
     queryKey: QUERY_KEYS.user.all(),
-    queryFn: () => userAPI.getUserInfoAPI(),
+    queryFn: () => userAPI.getUserInfoAPI(accessToken),
   });
 
   const adminUsers = data?.data;

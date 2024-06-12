@@ -32,14 +32,16 @@ function Star() {
     itemsPerPage,
   });
 
+  const accessToken = localStorage.getItem("access-token");
+
   const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.star.all(),
-    queryFn: () => promptAPI.getPrompt("star"),
+    queryFn: () => promptAPI.getPrompt("star", accessToken),
   });
 
   const { data: starContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("star"),
-    queryFn: () => contentsAPI.getContents("star", Number(date)),
+    queryFn: () => contentsAPI.getContents("star", Number(date), accessToken),
   });
 
   useEffect(() => {

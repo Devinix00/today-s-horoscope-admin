@@ -11,10 +11,14 @@ function useLogin() {
   const onSubmit: SubmitHandler<LoginInputValues> = async (
     LoginInputValues: LoginInputValues
   ) => {
-    const response = await userAPI.loginAPI(LoginInputValues);
-    console.log(response.data);
+    const accessToken = localStorage.getItem("access-token");
+    const response = await userAPI.loginAPI(LoginInputValues, accessToken);
+
     if (response.response.ok) {
+      const { access, refresh } = response.data;
       setLoggedIn(true);
+      localStorage.setItem("access-token", access);
+      localStorage.setItem("refresh-token", refresh);
       router.push(routes.HOME);
     } else {
       alert(response.data.non_field_errors[0]);

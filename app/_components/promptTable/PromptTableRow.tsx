@@ -25,9 +25,10 @@ function PromptTableRow({
   category,
 }: PromptTableRowProps) {
   const queryClient = useQueryClient();
+  const accessToken = localStorage.getItem("access-token");
   const { mutate: addPrompt } = useMutation({
     mutationFn: (promptMessage: string) =>
-      promptAPI.addPrompt(category, promptMessage),
+      promptAPI.addPrompt(category, promptMessage, accessToken),
     onSuccess: () => {
       switch (category) {
         case "today":

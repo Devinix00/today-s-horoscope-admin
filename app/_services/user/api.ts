@@ -1,20 +1,27 @@
 import BASE_API_URL from "../../_constants/base.api.url";
 
 const userAPI = {
-  getUserInfoAPI: async function () {
+  getUserInfoAPI: async function (accessToken: string) {
     const response = await fetch(`${BASE_API_URL}/admin/`, {
       method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
 
     const data = await response.json();
     return { data, response };
   },
 
-  loginAPI: async function (loginInputValues: LoginInputValues) {
+  loginAPI: async function (
+    loginInputValues: LoginInputValues,
+    accessToken: string
+  ) {
     const response = await fetch(`${BASE_API_URL}/admin/login/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
         username: loginInputValues.admin_id,

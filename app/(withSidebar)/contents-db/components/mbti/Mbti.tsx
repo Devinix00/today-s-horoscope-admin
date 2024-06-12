@@ -31,15 +31,16 @@ function Mbti() {
     totalItems,
     itemsPerPage,
   });
+  const accessToken = localStorage.getItem("access-token");
 
   const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.mbti.all(),
-    queryFn: () => promptAPI.getPrompt("mbti"),
+    queryFn: () => promptAPI.getPrompt("mbti", accessToken),
   });
 
   const { data: mbtiContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("mbti"),
-    queryFn: () => contentsAPI.getContents("mbti", Number(date)),
+    queryFn: () => contentsAPI.getContents("mbti", Number(date), accessToken),
   });
 
   useEffect(() => {

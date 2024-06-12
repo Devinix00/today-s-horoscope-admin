@@ -34,14 +34,16 @@ function Zodiac() {
     itemsPerPage,
   });
 
+  const accessToken = localStorage.getItem("access-token");
+
   const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.zodiac.all(),
-    queryFn: () => promptAPI.getPrompt("zodiac"),
+    queryFn: () => promptAPI.getPrompt("zodiac", accessToken),
   });
 
   const { data: zodiacContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("zodiac"),
-    queryFn: () => contentsAPI.getContents("zodiac", Number(date)),
+    queryFn: () => contentsAPI.getContents("zodiac", Number(date), accessToken),
   });
 
   useEffect(() => {

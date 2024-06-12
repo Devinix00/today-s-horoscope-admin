@@ -14,10 +14,11 @@ function StarContentsTableRow({ star }: StarContentsTableRowProps) {
   const [value, setValue] = useState(star?.luck_msg);
   const [isClickedButton, setIsClickedButton] = useState(false);
   const queryClient = useQueryClient();
+  const accessToken = localStorage.getItem("access-token");
 
   const { mutate: editContents } = useMutation({
     mutationFn: ({ id, value }: { id: number; value: string }) =>
-      contentsAPI.editContents({ id, value }),
+      contentsAPI.editContents({ id, value, accessToken }),
     onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.contents.categoryAll("star"),
