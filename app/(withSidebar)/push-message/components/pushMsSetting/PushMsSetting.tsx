@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { FormEvent, useEffect } from "react";
 import Setting from "../../../../_components/setting/Setting";
 import DropdownButton from "../../../../_components/dropdown/DropdownButton";
 import Image from "next/image";
@@ -7,10 +7,11 @@ import DropdownList from "../../../../_components/dropdown/DropdownList";
 import DropdownItems from "../../../../_components/dropdown/DropdownItems";
 import useDropdownStore from "../../../../_stores/useDropdownStore";
 import useResetDropdown from "../../../../_hooks/useResetDropdown";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import admsAPI from "../../../../_services/adms/api";
 import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import getFormattedSettings from "../../../../_utils/getFormattedSettings";
+import getFormattedSubmitSettings from "../../../../_utils/getFormattedSubmitSettings";
 
 function PushMsSetting() {
   const {
@@ -22,7 +23,7 @@ function PushMsSetting() {
     setMinuteDropdownItem,
   } = useDropdownStore();
   useResetDropdown();
-
+  const queryClient = useQueryClient();
   const accessToken = localStorage.getItem("access-token");
 
   const { data } = useQuery({
@@ -39,8 +40,39 @@ function PushMsSetting() {
     setMinuteDropdownItem(Number(minute));
   }, [hour, minute, setHourDropdownItem, setMinuteDropdownItem]);
 
+  const { formattedData: push_ms } = getFormattedSubmitSettings(
+    hourDropdownItem,
+    minuteDropdownItem
+  );
+
+  const { mutate: mutateAddPushMsSetting, data: mutateData } = useMutation({
+    mutationFn: () => admsAPI.addAdmsPush(push_ms, accessToken),
+    onSuccess: () => {
+      queryClient.invalidateQueries(QUERY_KEYS.adms.push());
+    },
+  });
+
+  const handleSubbmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (
+      confirm(
+        `${hourDropdownItem}시 ${minuteDropdownItem}분으로 푸시 메세지 발송 시간을 설정하시겠습니까?`
+      )
+    ) {
+      alert("설정합니다.");
+    } else {
+      return alert("취소합니다.");
+    }
+
+    mutateAddPushMsSetting();
+
+    if (!mutateData.response.ok) {
+      alert(mutateData.data.Error);
+    }
+  };
+
   return (
-    <Setting settingHeader="발송 시간 설정">
+    <Setting onClick={handleSubbmit} settingHeader="발송 시간 설정">
       <section className="relative">
         <DropdownButton type="hour" content={`${hourDropdownItem}시`}>
           <Image

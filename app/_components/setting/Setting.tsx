@@ -5,11 +5,13 @@ import { PropsWithChildren } from "react";
 interface SettingProps {
   settingHeader: string;
   settingFooterText?: string;
+  onClick: any;
 }
 
 function Setting({
   settingHeader,
   settingFooterText,
+  onClick,
   children,
 }: PropsWithChildren<SettingProps>) {
   return (
@@ -23,7 +25,10 @@ function Setting({
 
       <section className="w-full h-10 bg-gray-200 flex justify-end items-center ">
         <p className="mr-auto pl-4">{settingFooterText}</p>
-        <button className="w-20 h-fit py-[2.5px] mr-1 rounded-md bg-blue-500 text-white">
+        <button
+          onClick={onClick}
+          className="w-20 h-fit py-[2.5px] mr-1 rounded-md bg-blue-500 text-white"
+        >
           적용
         </button>
       </section>
