@@ -16,8 +16,8 @@ function Star() {
   const today = dayjs().format("YYYYMMDD");
   const [date, setDate] = useState(today);
   const [isClickedHistoryButton, setIsClickedHistoryButton] = useState(false);
-  const totalItems = 48 * 180;
-  const itemsPerPage = 1;
+  const totalItems = 12 * 180;
+  const itemsPerPage = 12;
   const {
     currentPage,
     handleNext,

@@ -18,8 +18,8 @@ function Zodiac() {
   const today = dayjs().format("YYYYMMDD");
   const [date, setDate] = useState(today);
   const [isClickedHistoryButton, setIsClickedHistoryButton] = useState(false);
-  const totalItems = 540;
-  const itemsPerPage = 7;
+  const totalItems = 48 * 180;
+  const itemsPerPage = 48;
   const {
     currentPage,
     handleNext,

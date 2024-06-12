@@ -16,8 +16,8 @@ function Mbti() {
   const today = dayjs().format("YYYYMMDD");
   const [date, setDate] = useState(today);
   const [isClickedHistoryButton, setIsClickedHistoryButton] = useState(false);
-  const totalItems = 540;
-  const itemsPerPage = 7;
+  const totalItems = 16 * 180;
+  const itemsPerPage = 16;
   const {
     currentPage,
     handleNext,
