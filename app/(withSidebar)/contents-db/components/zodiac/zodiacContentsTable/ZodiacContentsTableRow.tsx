@@ -17,24 +17,20 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
     [key: number]: boolean;
   }>({});
 
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
+  const accessToken = localStorage.getItem("access-token");
 
-  // const { mutate: editContents } = useMutation({
-  //   mutationFn: ({ id, value }: { id: number; value: string }) =>
-  //     contentsAPI.editContents({ id, value }),
-  //   onSettled: () => {
-  //     queryClient.invalidateQueries({
-  //       queryKey: QUERY_KEYS.contents.categoryAll("zodiac"),
-  //     });
-  //   },
-  // });
+  const { mutate: editContents } = useMutation({
+    mutationFn: ({ id, inputValue }: { id: number; inputValue: string }) =>
+      contentsAPI.editContents({ id, value: inputValue, accessToken }),
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.contents.categoryAll("zodiac"),
+      });
+    },
+  });
 
-  const handleClickButton = (
-    index: number,
-    message: string
-    // id: number,
-    // value: string
-  ) => {
+  const handleClickButton = (index: number, message: string, id: number) => {
     const newState = !isClickedButtonMap[index];
     setIsClickedButtonMap((prev) => ({ ...prev, [index]: newState }));
 
@@ -46,7 +42,7 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
         textareaRef.current?.focus();
       }, 0);
     } else {
-      // editContents({ id, value });
+      editContents({ id, inputValue: message });
       setEditingIndex(null);
     }
   };
@@ -78,7 +74,7 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
           <TableCell size="sm">
             <TableButton
               isClickedButton={!!isClickedButtonMap[i]}
-              onClick={() => handleClickButton(i, message.luck_msg)}
+              onClick={() => handleClickButton(i, inputValue, message.msg_id)}
             >
               {editingIndex === i && !!isClickedButtonMap[i] ? "저장" : "수정"}
             </TableButton>

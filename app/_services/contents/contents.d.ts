@@ -8,6 +8,7 @@ interface Contents {
 }
 
 interface ZodiacMessage {
+  msg_id: number;
   attribute2: string;
   luck_msg: string;
 }

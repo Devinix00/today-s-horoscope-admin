@@ -9,20 +9,11 @@ export default function WithSidebarLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [mount, setMount] = useState(false);
-  useEffect(() => {
-    setMount(true);
-  }, []);
-
   return (
     // <RedirectContainer>
     <div className="flex">
-      {mount && (
-        <>
-          <Sidebar />
-          {children}
-        </>
-      )}
+      <Sidebar />
+      {children}
     </div>
     // </RedirectContainer>
   );

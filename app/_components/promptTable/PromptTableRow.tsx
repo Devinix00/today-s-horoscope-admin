@@ -60,7 +60,7 @@ function PromptTableRow({
   useEffect(() => {
     setEditTextareaValue(promptData?.prompt_msg);
   }, [promptData]);
-  const formattedDate = dayjs(promptData?.last_date).format("MM/DD");
+  const formattedDate = dayjs(promptData?.create_date).format("MM/DD");
 
   const handleClickEditButton = () => {
     setIsClickedEditButton(true);
