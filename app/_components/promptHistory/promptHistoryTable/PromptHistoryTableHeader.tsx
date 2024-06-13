@@ -1,15 +1,17 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import TableHeader from '../../../_components/table/TableHeader';
+import React, { Dispatch, SetStateAction } from "react";
+import TableHeader from "../../../_components/table/TableHeader";
 
 interface PromptHistoryTableHeaderProps {
   setIsClickedHistoryButton: Dispatch<SetStateAction<boolean>>;
 }
 
-function PromptHistoryTableHeader({ setIsClickedHistoryButton }: PromptHistoryTableHeaderProps) {
+function PromptHistoryTableHeader({
+  setIsClickedHistoryButton,
+}: PromptHistoryTableHeaderProps) {
   return (
     <thead>
       <tr>
-        <TableHeader content="날짜" />
+        <TableHeader content="생성일" />
         <TableHeader content="프롬프트" />
 
         <TableHeader
