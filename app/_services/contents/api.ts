@@ -31,6 +31,18 @@ const contentsAPI = {
     const data = await response.json();
     return { data, response };
   },
+
+  getDashboard: async () => {
+    const { accessToken } = tokenManager();
+    const response = await fetch(`${BASE_API_URL}/admin/dashboard/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const data = await response.json();
+    return data;
+  },
 };
 
 export default contentsAPI;

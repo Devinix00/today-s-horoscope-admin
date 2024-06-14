@@ -40,4 +40,6 @@ export const QUERY_KEYS = {
     push: () => ["push"],
     terms: () => ["terms"],
   },
+
+  dashboard: () => ["dashboard"],
 };

@@ -1,13 +1,24 @@
-import React from "react";
+"use client";
+
 import HomeContent from "./_components/HomeContent";
 import ShortcutsLink from "./_components/ShortcutsLink";
 import routes from "../../_constants/routes";
 import ShortcutsButton from "./_components/ShortcutsButton";
 import MainContainer from "../../_components/mainContainer/MainContainer";
 import dayjs from "dayjs";
+import contentsAPI from "../../_services/contents/api";
+import { useQuery } from "@tanstack/react-query";
+import { QUERY_KEYS } from "../../_constants/queryKey";
 
 function Home() {
   const today = dayjs().format("YYYY/MM/DD");
+  const { data: dashboard } = useQuery({
+    queryKey: QUERY_KEYS.dashboard(),
+    queryFn: () => contentsAPI.getDashboard(),
+  });
+  const dashboardDate = dashboard?.split("").slice(0, 8).join("");
+  const formattedDashboardDate = dayjs(dashboardDate).format("YYYY/MM/DD");
+
   return (
     <MainContainer>
       <div className="grid grid-cols-2 gap-14">
@@ -17,7 +28,9 @@ function Home() {
           </div>
           <div className="absolute top-16">
             <li>
-              <span className="text-blue-500">2024/08/15 생성 완료</span>
+              <span className="text-blue-500">
+                {formattedDashboardDate} 생성 완료
+              </span>
             </li>
           </div>
           <ShortcutsLink type={routes.CONTENTS_DB} href={routes.CONTENTS_DB} />
