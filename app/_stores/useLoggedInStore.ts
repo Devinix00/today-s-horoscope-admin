@@ -14,7 +14,7 @@ const useLoggedInStore = create(
     }),
     {
       name: "storage",
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );
