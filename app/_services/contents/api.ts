@@ -1,11 +1,9 @@
 import BASE_API_URL from "../../_constants/base.api.url";
+import tokenManager from "../../_utils/tokenManager";
 
 const contentsAPI = {
-  getContents: async function (
-    category: Category,
-    date: number,
-    accessToken: string
-  ) {
+  getContents: async function (category: Category, date: number) {
+    const { accessToken } = tokenManager();
     const response = await fetch(`${BASE_API_URL}/admin/${category}/${date}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -16,7 +14,8 @@ const contentsAPI = {
     return { data, response };
   },
 
-  editContents: async function ({ id, value, accessToken }) {
+  editContents: async function ({ id, value }) {
+    const { accessToken } = tokenManager();
     const response = await fetch(`${BASE_API_URL}/admin/msg/`, {
       method: "POST",
       headers: {

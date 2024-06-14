@@ -4,7 +4,6 @@ import TableButton from "../../../../../_components/table/TableButton";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import contentsAPI from "../../../../../_services/contents/api";
 import { QUERY_KEYS } from "../../../../../_constants/queryKey";
-import tokenManager from "../../../../../_utils/tokenManager";
 
 interface MbtiContentsTableRowProps {
   mbti: Contents;
@@ -16,11 +15,9 @@ function MbtiContentsTableRow({ mbti }: MbtiContentsTableRowProps) {
   const [isClickedButton, setIsClickedButton] = useState(false);
   const queryClient = useQueryClient();
 
-  const { accessToken } = tokenManager();
-
   const { mutate: editContents } = useMutation({
     mutationFn: ({ id, value }: { id: number; value: string }) =>
-      contentsAPI.editContents({ id, value, accessToken }),
+      contentsAPI.editContents({ id, value }),
     onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.contents.categoryAll("mbti"),

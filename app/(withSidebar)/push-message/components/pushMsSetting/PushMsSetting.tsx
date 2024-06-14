@@ -12,7 +12,6 @@ import admsAPI from "../../../../_services/adms/api";
 import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import getFormattedSettings from "../../../../_utils/getFormattedSettings";
 import getFormattedSubmitSettings from "../../../../_utils/getFormattedSubmitSettings";
-import tokenManager from "../../../../_utils/tokenManager";
 import useLoginVerification from "../../../../_hooks/useLoginVerification";
 
 function PushMsSetting() {
@@ -26,11 +25,10 @@ function PushMsSetting() {
   } = useDropdownStore();
   useResetDropdown();
   const queryClient = useQueryClient();
-  const { accessToken } = tokenManager();
 
   const { data } = useQuery({
     queryKey: QUERY_KEYS.adms.push(),
-    queryFn: () => admsAPI.getAdms("push", accessToken),
+    queryFn: () => admsAPI.getAdms("push"),
   });
   const pushTime: string = data?.data.push_time;
 
@@ -50,7 +48,7 @@ function PushMsSetting() {
   );
 
   const { mutate: mutateAddPushMsSetting, data: mutateData } = useMutation({
-    mutationFn: () => admsAPI.addAdmsPush(push_ms, accessToken),
+    mutationFn: () => admsAPI.addAdmsPush(push_ms),
     onSuccess: () => {
       queryClient.invalidateQueries(QUERY_KEYS.adms.push());
     },

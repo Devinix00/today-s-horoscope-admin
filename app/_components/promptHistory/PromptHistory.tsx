@@ -6,7 +6,6 @@ import ContentTitle from "../contentTitle/ContentTitle";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../_constants/queryKey";
 import promptAPI from "../../_services/prompt/api";
-import tokenManager from "../../_utils/tokenManager";
 import useLoginVerification from "../../_hooks/useLoginVerification";
 
 interface PromptHistoryProps {
@@ -19,10 +18,9 @@ function PromptHistory({
   setIsClickedHistoryButton,
 }: PromptHistoryProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const { accessToken } = tokenManager();
   const { data: history, refetch: refetchHistory } = useQuery({
     queryKey: QUERY_KEYS.prompt.history.all(type),
-    queryFn: () => promptAPI.getHistory(type, currentPage, accessToken),
+    queryFn: () => promptAPI.getHistory(type, currentPage),
   });
   useLoginVerification(history?.response);
   const totalItems = history?.data.total;

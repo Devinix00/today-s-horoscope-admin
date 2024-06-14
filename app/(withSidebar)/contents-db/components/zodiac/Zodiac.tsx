@@ -12,7 +12,6 @@ import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import contentsAPI from "../../../../_services/contents/api";
 import promptAPI from "../../../../_services/prompt/api";
 import useScrollToTop from "../../../../_hooks/useScrollToTop";
-import tokenManager from "../../../../_utils/tokenManager";
 import useLoginVerification from "../../../../_hooks/useLoginVerification";
 
 function Zodiac() {
@@ -36,18 +35,16 @@ function Zodiac() {
     itemsPerPage,
   });
 
-  const { accessToken } = tokenManager();
-
   const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.zodiac.all(),
-    queryFn: () => promptAPI.getPrompt("zodiac", accessToken),
+    queryFn: () => promptAPI.getPrompt("zodiac"),
   });
 
   useLoginVerification(prompt?.response);
 
   const { data: zodiacContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("zodiac"),
-    queryFn: () => contentsAPI.getContents("zodiac", Number(date), accessToken),
+    queryFn: () => contentsAPI.getContents("zodiac", Number(date)),
   });
 
   useEffect(() => {

@@ -3,13 +3,13 @@ import tokenManager from "../_utils/tokenManager";
 import userAPI from "../_services/user/api";
 
 export default function useAutoRefresh() {
-  const { accessToken, refreshToken, setAccessToken } = tokenManager();
-
-  const NINE_MINUTE = 1000 * 60 * 9;
+  const { refreshToken, setAccessToken } = tokenManager();
 
   useEffect(() => {
+    const NINE_MINUTE = 1000 * 60 * 9;
+
     const refresh = async () => {
-      const response = await userAPI.refreshAPI(accessToken, refreshToken);
+      const response = await userAPI.refreshAPI(refreshToken);
       setAccessToken(response.data.access);
     };
 
@@ -20,5 +20,5 @@ export default function useAutoRefresh() {
     }, NINE_MINUTE);
 
     return () => clearInterval(interval);
-  }, [NINE_MINUTE, accessToken, refreshToken, setAccessToken]);
+  }, [refreshToken, setAccessToken]);
 }

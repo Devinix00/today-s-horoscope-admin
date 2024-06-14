@@ -1,7 +1,10 @@
 import BASE_API_URL from "../../_constants/base.api.url";
+import tokenManager from "../../_utils/tokenManager";
 
 const userAPI = {
-  getUserInfoAPI: async function (accessToken: string) {
+  getUserInfoAPI: async function () {
+    const { accessToken } = tokenManager();
+
     const response = await fetch(`${BASE_API_URL}/admin/`, {
       method: "GET",
       headers: {
@@ -29,12 +32,11 @@ const userAPI = {
     return { data, response };
   },
 
-  refreshAPI: async function (accessToken, refreshToken: string) {
+  refreshAPI: async function (refreshToken: string) {
     const response = await fetch(`${BASE_API_URL}/admin/refresh/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
         refresh: refreshToken,

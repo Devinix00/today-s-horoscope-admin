@@ -8,7 +8,6 @@ import admsAPI from "../../../../../_services/adms/api";
 import useDropdownStore from "../../../../../_stores/useDropdownStore";
 import useResetDropdown from "../../../../../_hooks/useResetDropdown";
 import getFormattedSubmitSettings from "../../../../../_utils/getFormattedSubmitSettings";
-import tokenManager from "../../../../../_utils/tokenManager";
 import useLoginVerification from "../../../../../_hooks/useLoginVerification";
 
 function AutoDateSettingContainer() {
@@ -26,10 +25,9 @@ function AutoDateSettingContainer() {
   } = useDropdownStore();
   useResetDropdown();
 
-  const { accessToken } = tokenManager();
   const { data: autoDate } = useQuery({
     queryKey: QUERY_KEYS.adms.terms(),
-    queryFn: () => admsAPI.getAdms("terms", accessToken),
+    queryFn: () => admsAPI.getAdms("terms"),
   });
 
   const { formattedData: hour } = getFormattedSettings(
@@ -82,8 +80,7 @@ function AutoDateSettingContainer() {
   );
 
   const { mutate: mutateAddTemrs } = useMutation({
-    mutationFn: () =>
-      admsAPI.addAdmsTerms(submitAutoDate, submitAutoTime, accessToken),
+    mutationFn: () => admsAPI.addAdmsTerms(submitAutoDate, submitAutoTime),
     onSuccess: () => {
       queryClient.invalidateQueries(QUERY_KEYS.adms.terms());
     },

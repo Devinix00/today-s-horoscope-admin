@@ -11,7 +11,6 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import promptAPI from "../../../../_services/prompt/api";
 import contentsAPI from "../../../../_services/contents/api";
-import tokenManager from "../../../../_utils/tokenManager";
 import useLoginVerification from "../../../../_hooks/useLoginVerification";
 
 function Star() {
@@ -34,18 +33,16 @@ function Star() {
     itemsPerPage,
   });
 
-  const { accessToken } = tokenManager();
-
   const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.star.all(),
-    queryFn: () => promptAPI.getPrompt("star", accessToken),
+    queryFn: () => promptAPI.getPrompt("star"),
   });
 
   useLoginVerification(prompt?.response);
 
   const { data: starContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("star"),
-    queryFn: () => contentsAPI.getContents("star", Number(date), accessToken),
+    queryFn: () => contentsAPI.getContents("star", Number(date)),
   });
 
   useEffect(() => {

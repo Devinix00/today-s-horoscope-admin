@@ -1,7 +1,9 @@
 import BASE_API_URL from "../../_constants/base.api.url";
+import tokenManager from "../../_utils/tokenManager";
 
 const admsAPI = {
-  getAdms: async (type: "push" | "terms", accessToken: string) => {
+  getAdms: async (type: "push" | "terms") => {
+    const { accessToken } = tokenManager();
     const response = await fetch(`${BASE_API_URL}/adms/${type}/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -12,7 +14,8 @@ const admsAPI = {
     return { data, response };
   },
 
-  addAdmsPush: async (push_time: string, accessToken: string) => {
+  addAdmsPush: async (push_time: string) => {
+    const { accessToken } = tokenManager();
     const response = await fetch(`${BASE_API_URL}/adms/push/`, {
       method: "POST",
       headers: {
@@ -28,7 +31,8 @@ const admsAPI = {
     return { data, response };
   },
 
-  addAdmsSpecificdate: async (date: string, accessToken: string) => {
+  addAdmsSpecificdate: async (date: string) => {
+    const { accessToken } = tokenManager();
     const response = await fetch(`${BASE_API_URL}/gpt/luck/`, {
       method: "POST",
       headers: {
@@ -44,11 +48,8 @@ const admsAPI = {
     return { data, response };
   },
 
-  addAdmsTerms: async (
-    term_date: string,
-    term_time: string,
-    accessToken: string
-  ) => {
+  addAdmsTerms: async (term_date: string, term_time: string) => {
+    const { accessToken } = tokenManager();
     const response = await fetch(`${BASE_API_URL}/adms/terms/`, {
       method: "POST",
       headers: {

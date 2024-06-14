@@ -11,7 +11,6 @@ import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import promptAPI from "../../../../_services/prompt/api";
 import dayjs from "dayjs";
 import contentsAPI from "../../../../_services/contents/api";
-import tokenManager from "../../../../_utils/tokenManager";
 import useLoginVerification from "../../../../_hooks/useLoginVerification";
 
 function Mbti() {
@@ -33,18 +32,17 @@ function Mbti() {
     totalItems,
     itemsPerPage,
   });
-  const { accessToken } = tokenManager();
 
   const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.mbti.all(),
-    queryFn: () => promptAPI.getPrompt("mbti", accessToken),
+    queryFn: () => promptAPI.getPrompt("mbti"),
   });
 
   useLoginVerification(prompt?.response);
 
   const { data: mbtiContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("mbti"),
-    queryFn: () => contentsAPI.getContents("mbti", Number(date), accessToken),
+    queryFn: () => contentsAPI.getContents("mbti", Number(date)),
   });
 
   useEffect(() => {

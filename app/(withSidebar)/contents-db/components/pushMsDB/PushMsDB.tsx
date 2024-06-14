@@ -5,14 +5,12 @@ import useDatePagination from "../../../../_hooks/useDatePagination";
 import PromptHistory from "../../../../_components/promptHistory/PromptHistory";
 import PromptTable from "../../../../_components/promptTable/PromptTable";
 import ContentsForm from "../../../../_components/contentsForm/ContentsForm";
-
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import promptAPI from "../../../../_services/prompt/api";
 import contentsAPI from "../../../../_services/contents/api";
 import dayjs from "dayjs";
 import PushMsContentsTable from "./pushMsTable/pushMsContentsTable/PushMsContentsTable";
-import tokenManager from "../../../../_utils/tokenManager";
 import useLoginVerification from "../../../../_hooks/useLoginVerification";
 
 function PushMsDB() {
@@ -34,18 +32,17 @@ function PushMsDB() {
     totalItems,
     itemsPerPage,
   });
-  const { accessToken } = tokenManager();
 
   const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.today.all(),
-    queryFn: () => promptAPI.getPrompt("today", accessToken),
+    queryFn: () => promptAPI.getPrompt("today"),
   });
 
   useLoginVerification(prompt?.response);
 
   const { data: todayContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("today"),
-    queryFn: () => contentsAPI.getContents("today", Number(date), accessToken),
+    queryFn: () => contentsAPI.getContents("today", Number(date)),
   });
 
   useEffect(() => {

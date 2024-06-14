@@ -1,7 +1,9 @@
 import BASE_API_URL from "../../_constants/base.api.url";
+import tokenManager from "../../_utils/tokenManager";
 
 const promptAPI = {
-  getPrompt: async function (category: Category, accessToken: string) {
+  getPrompt: async function (category: Category) {
+    const { accessToken } = tokenManager();
     const response = await fetch(`${BASE_API_URL}/prompt/${category}/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -12,11 +14,8 @@ const promptAPI = {
     return { data, response };
   },
 
-  addPrompt: async function (
-    category: Category,
-    promptMessage: string,
-    accessToken: string
-  ) {
+  addPrompt: async function (category: Category, promptMessage: string) {
+    const { accessToken } = tokenManager();
     const response = await fetch(`${BASE_API_URL}/prompt/${category}/`, {
       method: "POST",
       headers: {
@@ -30,11 +29,8 @@ const promptAPI = {
     return { data, response };
   },
 
-  getHistory: async function (
-    category: Category,
-    page: number,
-    accessToken: string
-  ) {
+  getHistory: async function (category: Category, page: number) {
+    const { accessToken } = tokenManager();
     const response = await fetch(
       `${BASE_API_URL}/prompt/${category}/history/${page}/`,
       {

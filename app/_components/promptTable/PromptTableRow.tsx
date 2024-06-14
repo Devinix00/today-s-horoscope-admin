@@ -12,7 +12,6 @@ import dayjs from "dayjs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import promptAPI from "../../_services/prompt/api";
 import { QUERY_KEYS } from "../../_constants/queryKey";
-import tokenManager from "../../_utils/tokenManager";
 
 interface PromptTableRowProps {
   setIsClickedHistoryButton: Dispatch<SetStateAction<boolean>>;
@@ -26,10 +25,9 @@ function PromptTableRow({
   category,
 }: PromptTableRowProps) {
   const queryClient = useQueryClient();
-  const { accessToken } = tokenManager();
   const { mutate: addPrompt } = useMutation({
     mutationFn: (promptMessage: string) =>
-      promptAPI.addPrompt(category, promptMessage, accessToken),
+      promptAPI.addPrompt(category, promptMessage),
     onSuccess: () => {
       switch (category) {
         case "today":
