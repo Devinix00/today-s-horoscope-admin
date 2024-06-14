@@ -9,6 +9,7 @@ import useDropdownStore from "../../../../../_stores/useDropdownStore";
 import useResetDropdown from "../../../../../_hooks/useResetDropdown";
 import getFormattedSubmitSettings from "../../../../../_utils/getFormattedSubmitSettings";
 import tokenManager from "../../../../../_utils/tokenManager";
+import useLoginVerification from "../../../../../_hooks/useLoginVerification";
 
 function AutoDateSettingContainer() {
   const queryClient = useQueryClient();
@@ -32,11 +33,13 @@ function AutoDateSettingContainer() {
   });
 
   const { formattedData: hour } = getFormattedSettings(
-    autoDate?.data?.term_time.slice(0, 2)
+    autoDate?.data?.term_time?.slice(0, 2)
   );
   const { formattedData: minute } = getFormattedSettings(
-    autoDate?.data?.term_time.slice(2, 4)
+    autoDate?.data?.term_time?.slice(2, 4)
   );
+
+  useLoginVerification(autoDate?.response);
 
   const autoDateMap = {
     "0030": "30",
@@ -99,6 +102,8 @@ function AutoDateSettingContainer() {
     }
     mutateAddTemrs();
   };
+
+  if (autoDate?.response.status === 401) return;
 
   return (
     <Setting onClick={handleSubmit} settingHeader="콘텐츠 자동 생성일 설정">

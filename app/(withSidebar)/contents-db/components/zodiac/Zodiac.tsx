@@ -13,6 +13,7 @@ import contentsAPI from "../../../../_services/contents/api";
 import promptAPI from "../../../../_services/prompt/api";
 import useScrollToTop from "../../../../_hooks/useScrollToTop";
 import tokenManager from "../../../../_utils/tokenManager";
+import useLoginVerification from "../../../../_hooks/useLoginVerification";
 
 function Zodiac() {
   const { isVisible, scrollToTop } = useScrollToTop();
@@ -42,6 +43,8 @@ function Zodiac() {
     queryFn: () => promptAPI.getPrompt("zodiac", accessToken),
   });
 
+  useLoginVerification(prompt?.response);
+
   const { data: zodiacContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("zodiac"),
     queryFn: () => contentsAPI.getContents("zodiac", Number(date), accessToken),
@@ -50,6 +53,8 @@ function Zodiac() {
   useEffect(() => {
     refetchContents();
   }, [date, refetchContents]);
+
+  if (prompt?.response.status === 401) return;
 
   return (
     <div className="relative">

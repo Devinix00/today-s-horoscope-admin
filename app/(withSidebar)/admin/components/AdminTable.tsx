@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../../_constants/queryKey";
 import userAPI from "../../../_services/user/api";
 import tokenManager from "../../../_utils/tokenManager";
+import useLoginVerification from "../../../_hooks/useLoginVerification";
 
 function AdminTable() {
   const { accessToken } = tokenManager();
@@ -17,6 +18,8 @@ function AdminTable() {
   });
 
   const adminUsers = data?.data;
+  useLoginVerification(data?.response);
+  if (data?.response.status === 401) return;
 
   return (
     <div className="overflow-x-auto">

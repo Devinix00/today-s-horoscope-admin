@@ -12,6 +12,7 @@ import promptAPI from "../../../../_services/prompt/api";
 import dayjs from "dayjs";
 import contentsAPI from "../../../../_services/contents/api";
 import tokenManager from "../../../../_utils/tokenManager";
+import useLoginVerification from "../../../../_hooks/useLoginVerification";
 
 function Mbti() {
   const today = dayjs().format("YYYYMMDD");
@@ -39,6 +40,8 @@ function Mbti() {
     queryFn: () => promptAPI.getPrompt("mbti", accessToken),
   });
 
+  useLoginVerification(prompt?.response);
+
   const { data: mbtiContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("mbti"),
     queryFn: () => contentsAPI.getContents("mbti", Number(date), accessToken),
@@ -47,6 +50,7 @@ function Mbti() {
   useEffect(() => {
     refetchContents();
   }, [refetchContents, date]);
+  if (prompt?.response.status === 401) return;
 
   return (
     <div className="relative">

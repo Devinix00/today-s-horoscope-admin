@@ -13,6 +13,7 @@ import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import getFormattedSettings from "../../../../_utils/getFormattedSettings";
 import getFormattedSubmitSettings from "../../../../_utils/getFormattedSubmitSettings";
 import tokenManager from "../../../../_utils/tokenManager";
+import useLoginVerification from "../../../../_hooks/useLoginVerification";
 
 function PushMsSetting() {
   const {
@@ -31,8 +32,10 @@ function PushMsSetting() {
     queryKey: QUERY_KEYS.adms.push(),
     queryFn: () => admsAPI.getAdms("push", accessToken),
   });
-
   const pushTime: string = data?.data.push_time;
+
+  useLoginVerification(data?.response);
+
   const { formattedData: hour } = getFormattedSettings(pushTime?.slice(0, 2));
   const { formattedData: minute } = getFormattedSettings(pushTime?.slice(2, 4));
 
@@ -71,7 +74,7 @@ function PushMsSetting() {
       alert(mutateData.data?.Error);
     }
   };
-
+  if (data?.response.status === 401) return;
   return (
     <Setting onClick={handleSubbmit} settingHeader="발송 시간 설정">
       <section className="relative">

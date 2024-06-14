@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../_constants/queryKey";
 import promptAPI from "../../_services/prompt/api";
 import tokenManager from "../../_utils/tokenManager";
+import useLoginVerification from "../../_hooks/useLoginVerification";
 
 interface PromptHistoryProps {
   type: Category;
@@ -23,6 +24,7 @@ function PromptHistory({
     queryKey: QUERY_KEYS.prompt.history.all(type),
     queryFn: () => promptAPI.getHistory(type, currentPage, accessToken),
   });
+  useLoginVerification(history?.response);
   const totalItems = history?.data.total;
   const itemsPerPage = 4;
 
@@ -38,6 +40,8 @@ function PromptHistory({
   useEffect(() => {
     refetchHistory();
   }, [currentPage, refetchHistory]);
+
+  if (history?.response.status === 401) return;
 
   return (
     <div className="absolute top-0 left-0 bg-white w-full h-full">

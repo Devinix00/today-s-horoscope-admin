@@ -13,6 +13,7 @@ import contentsAPI from "../../../../_services/contents/api";
 import dayjs from "dayjs";
 import PushMsContentsTable from "./pushMsTable/pushMsContentsTable/PushMsContentsTable";
 import tokenManager from "../../../../_utils/tokenManager";
+import useLoginVerification from "../../../../_hooks/useLoginVerification";
 
 function PushMsDB() {
   const today = dayjs().format("YYYYMMDD");
@@ -40,6 +41,8 @@ function PushMsDB() {
     queryFn: () => promptAPI.getPrompt("today", accessToken),
   });
 
+  useLoginVerification(prompt?.response);
+
   const { data: todayContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("today"),
     queryFn: () => contentsAPI.getContents("today", Number(date), accessToken),
@@ -48,7 +51,7 @@ function PushMsDB() {
   useEffect(() => {
     refetchContents();
   }, [date, refetchContents]);
-
+  if (prompt?.response.status === 401) return;
   return (
     <div className="relative">
       <section className="mt-10">

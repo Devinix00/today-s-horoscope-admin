@@ -12,6 +12,7 @@ import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import promptAPI from "../../../../_services/prompt/api";
 import contentsAPI from "../../../../_services/contents/api";
 import tokenManager from "../../../../_utils/tokenManager";
+import useLoginVerification from "../../../../_hooks/useLoginVerification";
 
 function Star() {
   const today = dayjs().format("YYYYMMDD");
@@ -40,6 +41,8 @@ function Star() {
     queryFn: () => promptAPI.getPrompt("star", accessToken),
   });
 
+  useLoginVerification(prompt?.response);
+
   const { data: starContents, refetch: refetchContents } = useQuery({
     queryKey: QUERY_KEYS.contents.categoryAll("star"),
     queryFn: () => contentsAPI.getContents("star", Number(date), accessToken),
@@ -48,6 +51,8 @@ function Star() {
   useEffect(() => {
     refetchContents();
   }, [refetchContents, date]);
+
+  if (prompt?.response.status === 401) return;
 
   return (
     <div className="relative">
