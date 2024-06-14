@@ -12,6 +12,7 @@ import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import contentsAPI from "../../../../_services/contents/api";
 import promptAPI from "../../../../_services/prompt/api";
 import useScrollToTop from "../../../../_hooks/useScrollToTop";
+import tokenManager from "../../../../_utils/tokenManager";
 
 function Zodiac() {
   const { isVisible, scrollToTop } = useScrollToTop();
@@ -34,7 +35,7 @@ function Zodiac() {
     itemsPerPage,
   });
 
-  const accessToken = localStorage.getItem("access-token");
+  const { accessToken } = tokenManager();
 
   const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.zodiac.all(),

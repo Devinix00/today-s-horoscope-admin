@@ -4,6 +4,7 @@ import TableButton from "../../../../../_components/table/TableButton";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import contentsAPI from "../../../../../_services/contents/api";
 import { QUERY_KEYS } from "../../../../../_constants/queryKey";
+import tokenManager from "../../../../../_utils/tokenManager";
 
 interface ZodiacContentsTableRowProps {
   zodiac: ZodiacContents;
@@ -18,7 +19,7 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
   }>({});
 
   const queryClient = useQueryClient();
-  const accessToken = localStorage.getItem("access-token");
+  const { accessToken } = tokenManager();
 
   const { mutate: editContents } = useMutation({
     mutationFn: ({ id, inputValue }: { id: number; inputValue: string }) =>

@@ -12,6 +12,7 @@ import admsAPI from "../../../../_services/adms/api";
 import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import getFormattedSettings from "../../../../_utils/getFormattedSettings";
 import getFormattedSubmitSettings from "../../../../_utils/getFormattedSubmitSettings";
+import tokenManager from "../../../../_utils/tokenManager";
 
 function PushMsSetting() {
   const {
@@ -24,7 +25,7 @@ function PushMsSetting() {
   } = useDropdownStore();
   useResetDropdown();
   const queryClient = useQueryClient();
-  const accessToken = localStorage.getItem("access-token");
+  const { accessToken } = tokenManager();
 
   const { data } = useQuery({
     queryKey: QUERY_KEYS.adms.push(),

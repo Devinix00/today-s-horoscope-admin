@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import promptAPI from "../../../../_services/prompt/api";
 import contentsAPI from "../../../../_services/contents/api";
+import tokenManager from "../../../../_utils/tokenManager";
 
 function Star() {
   const today = dayjs().format("YYYYMMDD");
@@ -32,7 +33,7 @@ function Star() {
     itemsPerPage,
   });
 
-  const accessToken = localStorage.getItem("access-token");
+  const { accessToken } = tokenManager();
 
   const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.star.all(),

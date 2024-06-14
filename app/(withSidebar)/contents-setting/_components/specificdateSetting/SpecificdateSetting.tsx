@@ -4,12 +4,13 @@ import DropdownInput from "../../../../_components/dropdown/DropdownInput";
 import getNumericValue from "../../../../_utils/getNumericValue";
 import { useMutation } from "@tanstack/react-query";
 import admsAPI from "../../../../_services/adms/api";
+import tokenManager from "../../../../_utils/tokenManager";
 
 function SpecificdateSetting() {
   const [inputValue, setInputValue] = useState("");
   const handleChange = getNumericValue(setInputValue);
 
-  const accessToken = localStorage.getItem("access-token");
+  const { accessToken } = tokenManager();
 
   const { mutate } = useMutation({
     mutationFn: () => admsAPI.addAdmsSpecificdate(inputValue, accessToken),

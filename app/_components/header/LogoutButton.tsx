@@ -4,15 +4,19 @@ import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import routes from "../../_constants/routes";
 import useLoggedInStore from "../../_stores/useLoggedInStore";
+import tokenManager from "../../_utils/tokenManager";
 
 function LogoutButton() {
   const pathname = usePathname();
   const router = useRouter();
   const { setLoggedIn } = useLoggedInStore();
+  const { removeAccessToken, removeRefreshToken } = tokenManager();
 
   if (pathname === routes.LOGIN) return;
 
   const handleLogout = () => {
+    removeAccessToken();
+    removeRefreshToken();
     setLoggedIn(false);
     router.push(routes.LOGIN);
   };

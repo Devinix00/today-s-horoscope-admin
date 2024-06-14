@@ -8,6 +8,7 @@ import admsAPI from "../../../../../_services/adms/api";
 import useDropdownStore from "../../../../../_stores/useDropdownStore";
 import useResetDropdown from "../../../../../_hooks/useResetDropdown";
 import getFormattedSubmitSettings from "../../../../../_utils/getFormattedSubmitSettings";
+import tokenManager from "../../../../../_utils/tokenManager";
 
 function AutoDateSettingContainer() {
   const queryClient = useQueryClient();
@@ -24,7 +25,7 @@ function AutoDateSettingContainer() {
   } = useDropdownStore();
   useResetDropdown();
 
-  const accessToken = localStorage.getItem("access-token");
+  const { accessToken } = tokenManager();
   const { data: autoDate } = useQuery({
     queryKey: QUERY_KEYS.adms.terms(),
     queryFn: () => admsAPI.getAdms("terms", accessToken),

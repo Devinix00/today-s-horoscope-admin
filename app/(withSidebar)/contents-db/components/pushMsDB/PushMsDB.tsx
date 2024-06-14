@@ -12,6 +12,7 @@ import promptAPI from "../../../../_services/prompt/api";
 import contentsAPI from "../../../../_services/contents/api";
 import dayjs from "dayjs";
 import PushMsContentsTable from "./pushMsTable/pushMsContentsTable/PushMsContentsTable";
+import tokenManager from "../../../../_utils/tokenManager";
 
 function PushMsDB() {
   const today = dayjs().format("YYYYMMDD");
@@ -32,7 +33,7 @@ function PushMsDB() {
     totalItems,
     itemsPerPage,
   });
-  const accessToken = localStorage.getItem("access-token");
+  const { accessToken } = tokenManager();
 
   const { data: prompt } = useQuery({
     queryKey: QUERY_KEYS.prompt.today.all(),

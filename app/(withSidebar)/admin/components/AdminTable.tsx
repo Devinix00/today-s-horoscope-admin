@@ -7,9 +7,10 @@ import AdminTableHeader from "./AdminTableHeader";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../../_constants/queryKey";
 import userAPI from "../../../_services/user/api";
+import tokenManager from "../../../_utils/tokenManager";
 
 function AdminTable() {
-  const accessToken = localStorage.getItem("access-token");
+  const { accessToken } = tokenManager();
   const { data } = useQuery({
     queryKey: QUERY_KEYS.user.all(),
     queryFn: () => userAPI.getUserInfoAPI(accessToken),

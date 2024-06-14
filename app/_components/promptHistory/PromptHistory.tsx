@@ -6,6 +6,7 @@ import ContentTitle from "../contentTitle/ContentTitle";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../_constants/queryKey";
 import promptAPI from "../../_services/prompt/api";
+import tokenManager from "../../_utils/tokenManager";
 
 interface PromptHistoryProps {
   type: Category;
@@ -17,7 +18,7 @@ function PromptHistory({
   setIsClickedHistoryButton,
 }: PromptHistoryProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const accessToken = localStorage.getItem("access-token");
+  const { accessToken } = tokenManager();
   const { data: history, refetch: refetchHistory } = useQuery({
     queryKey: QUERY_KEYS.prompt.history.all(type),
     queryFn: () => promptAPI.getHistory(type, currentPage, accessToken),
