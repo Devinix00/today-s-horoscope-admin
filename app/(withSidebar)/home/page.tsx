@@ -9,7 +9,6 @@ import dayjs from "dayjs";
 import contentsAPI from "../../_services/contents/api";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../_constants/queryKey";
-import useLoginVerification from "../../_hooks/useLoginVerification";
 
 function Home() {
   const today = dayjs().format("YYYY/MM/DD");
@@ -17,11 +16,7 @@ function Home() {
     queryKey: QUERY_KEYS.dashboard(),
     queryFn: () => contentsAPI.getDashboard(),
   });
-
-  useLoginVerification(dashboard?.response);
-
-  if (dashboard?.response.status === 401) return;
-  const dashboardDate = dashboard?.data.split("").slice(0, 8).join("");
+  const dashboardDate = dashboard?.split("").slice(0, 8).join("");
   const formattedDashboardDate = dayjs(dashboardDate).format("YYYY/MM/DD");
 
   return (
