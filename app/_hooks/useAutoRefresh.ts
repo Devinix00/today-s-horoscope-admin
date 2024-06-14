@@ -8,10 +8,15 @@ export default function useAutoRefresh() {
   const NINE_MINUTE = 1000 * 60 * 9;
 
   useEffect(() => {
-    const interval = setInterval(async () => {
+    const refresh = async () => {
       const response = await userAPI.refreshAPI(accessToken, refreshToken);
-
       setAccessToken(response.data.access);
+    };
+
+    refresh();
+
+    const interval = setInterval(() => {
+      refresh();
     }, NINE_MINUTE);
 
     return () => clearInterval(interval);

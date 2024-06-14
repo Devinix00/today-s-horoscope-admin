@@ -5,7 +5,6 @@ import "../styles/global.css";
 import ReactQueryProvider from "./_react-query/ReactQueryProvider";
 import Header from "./_components/header/Header";
 import { ReactNode, useEffect, useState } from "react";
-import useAutoRefresh from "./_hooks/useAutoRefresh";
 
 export default function RootLayout({
   children,
@@ -17,7 +16,6 @@ export default function RootLayout({
   useEffect(() => {
     setMount(true);
   }, []);
-  useAutoRefresh();
 
   return (
     <html lang="en">
