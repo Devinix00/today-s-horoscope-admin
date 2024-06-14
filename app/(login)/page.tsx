@@ -1,17 +1,37 @@
 "use client";
 
 import { useEffect } from "react";
-import useLoggedInStore from "../_stores/useLoggedInStore";
+
 import LoginForm from "./_components/LoginForm";
 import { useRouter } from "next/navigation";
+import useLoggedInStore from "../_stores/useLoggedInStore";
+import tokenManager from "../_utils/tokenManager";
+import userAPI from "../_services/user/api";
 import routes from "../_constants/routes";
 
 function Login() {
-  const { loggedIn } = useLoggedInStore();
+  const { loggedIn, setLoggedIn } = useLoggedInStore();
   const router = useRouter();
+
   useEffect(() => {
-    if (loggedIn) router.push(routes.HOME);
-  }, [loggedIn, router]);
+    const refresh = async () => {
+      if (loggedIn) {
+        const { refreshToken, setAccessToken } = tokenManager();
+        const { data, response } = await userAPI.refreshAPI(refreshToken);
+        if (response.ok) {
+          setAccessToken(data?.access);
+          setTimeout(() => {
+            router.push(routes.HOME);
+          }, 500);
+        } else if (response.status === 401) {
+          setLoggedIn(false);
+          return alert("토큰이 만료되었습니다. 다시 로그인 해주세요");
+        }
+      }
+    };
+
+    refresh();
+  }, [loggedIn, router, setLoggedIn]);
 
   return (
     <>

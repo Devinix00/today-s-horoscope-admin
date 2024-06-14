@@ -1,5 +1,5 @@
-import React from 'react';
-import TableHeader from '../../../../../../_components/table/TableHeader';
+import React from "react";
+import TableHeader from "../../../../../../_components/table/TableHeader";
 
 function PushMsContentsTableHeader() {
   return (
