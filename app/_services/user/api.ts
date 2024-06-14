@@ -28,6 +28,22 @@ const userAPI = {
     const data = await response.json();
     return { data, response };
   },
+
+  refreshAPI: async function (accessToken, refreshToken: string) {
+    const response = await fetch(`${BASE_API_URL}/admin/refresh/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({
+        refresh: refreshToken,
+      }),
+    });
+
+    const data = await response.json();
+    return { data, response };
+  },
 };
 
 export default userAPI;
