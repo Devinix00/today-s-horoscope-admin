@@ -65,6 +65,24 @@ const admsAPI = {
     const data = await response.json();
     return { data, response };
   },
+
+  addInitialPeriodSetting: async (date1: string, date2: string) => {
+    const { accessToken } = tokenManager();
+    const response = await fetch(`${BASE_API_URL}/gpt/luck/terms/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({
+        date1: date1,
+        date2: date2,
+      }),
+    });
+
+    const data = await response.json();
+    return { data, response };
+  },
 };
 
 export default admsAPI;
