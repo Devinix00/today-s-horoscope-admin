@@ -24,8 +24,12 @@ function AdminTable() {
       <table className="min-w-full leading-normal">
         <AdminTableHeader />
         <tbody>
-          {adminUsers?.map((user) => (
-            <AdminTableRow key={user.admins_id} adminUser={user} />
+          {adminUsers?.map((user, index) => (
+            <AdminTableRow
+              key={user.admins_id}
+              index={index}
+              adminUser={user}
+            />
           ))}
         </tbody>
       </table>
