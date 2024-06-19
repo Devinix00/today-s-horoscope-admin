@@ -67,10 +67,6 @@ function PushMsSetting() {
     }
 
     mutateAddPushMsSetting();
-
-    if (!mutateData?.response.ok) {
-      alert(mutateData?.data?.Error);
-    }
   };
   if (data?.response.status === 401) return;
   return (
