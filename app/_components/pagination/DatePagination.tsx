@@ -26,7 +26,7 @@ function DatePagination({
   totalPages,
   setDate,
 }: DatePaginationProps) {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: null,
     queryFn: () => contentsAPI.getDatesWithData(),
   });
@@ -38,9 +38,11 @@ function DatePagination({
   );
 
   useEffect(() => {
-    const currentPageDate = pageDates[pageNumbers.indexOf(currentPage)];
-    setDate(currentPageDate);
-    setMissingDateState(missingDates.includes(currentPageDate));
+    if (!isLoading) {
+      const currentPageDate = pageDates[pageNumbers.indexOf(currentPage)];
+      setDate(currentPageDate);
+      setMissingDateState(missingDates.includes(currentPageDate));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
