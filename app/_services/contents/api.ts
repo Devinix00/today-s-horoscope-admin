@@ -43,6 +43,18 @@ const contentsAPI = {
     const data = await response.json();
     return { data, response };
   },
+
+  getDatesWithData: async () => {
+    const { accessToken } = tokenManager();
+    const response = await fetch(`${BASE_API_URL}/admin/luckdays/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const data = await response.json();
+    return { data, response };
+  },
 };
 
 export default contentsAPI;

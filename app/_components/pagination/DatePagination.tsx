@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { NextArrow, PrevArrow } from "../../_images";
 import { Dispatch, SetStateAction } from "react";
+import { useQuery } from "@tanstack/react-query";
+import contentsAPI from "../../_services/contents/api";
 
 interface DatePaginationProps {
   pageDates: string[];
@@ -23,6 +25,17 @@ function DatePagination({
   totalPages,
   setDate,
 }: DatePaginationProps) {
+  const { data } = useQuery({
+    queryKey: [""],
+    queryFn: () => contentsAPI.getDatesWithData(),
+  });
+
+  const datesWithData = data?.data.luck_days;
+
+  const missingDates = pageDates.filter(
+    (date) => !datesWithData.includes(date)
+  );
+
   return (
     <div className="flex ">
       <button
@@ -38,19 +51,39 @@ function DatePagination({
           setDate(date);
         }
         return (
-          <button
-            key={pageNumbers[index]}
-            onClick={() => {
-              setCurrentPage(pageNumbers[index]);
-            }}
-            className={`w-full px-3 py-2 border rounded ${
-              currentPage === pageNumbers[index]
-                ? "bg-blue-500 text-white"
-                : "bg-white"
-            }`}
-          >
-            {date}
-          </button>
+          <div key={pageNumbers[index]} className="relative w-full">
+            <button
+              onClick={() => {
+                setCurrentPage(pageNumbers[index]);
+              }}
+              className={`w-full px-3 py-2 border rounded ${
+                currentPage === pageNumbers[index]
+                  ? "bg-blue-500 text-white"
+                  : "bg-white"
+              }`}
+            >
+              {date}
+            </button>
+            {missingDates.includes(date) && (
+              <div
+                className={`absolute top-1/2 right-4 -translate-y-1/2 w-5 h-5 flex rounded-full items-center justify-center border-[1px] ${
+                  currentPage === pageNumbers[index]
+                    ? "border-white"
+                    : "border-[#686868]"
+                }`}
+              >
+                <p
+                  className={`absolute text-sm -top-[2px] ${
+                    currentPage === pageNumbers[index]
+                      ? "text-white"
+                      : "text-[#686868]"
+                  }`}
+                >
+                  x
+                </p>
+              </div>
+            )}
+          </div>
         );
       })}
 
