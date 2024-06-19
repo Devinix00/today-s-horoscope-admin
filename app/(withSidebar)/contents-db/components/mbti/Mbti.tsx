@@ -62,7 +62,13 @@ function Mbti() {
       </section>
       <section className="mt-10">
         <ContentTitle title="생성 콘텐츠" />
-        <ContentsForm {...{ findPageFromDate, setCurrentPage }} />
+        <ContentsForm
+          {...{
+            findPageFromDate,
+            setCurrentPage,
+            lastDate: prompt?.data.last_date,
+          }}
+        />
         <DatePagination
           {...{
             pageDates,

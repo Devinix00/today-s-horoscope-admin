@@ -5,9 +5,14 @@ import getNumericValue from "../../_utils/getNumericValue";
 interface ContentsFormProps {
   findPageFromDate: (inputDate: string) => number | null;
   setCurrentPage: Dispatch<SetStateAction<number>>;
+  lastDate: string;
 }
 
-function ContentsForm({ findPageFromDate, setCurrentPage }: ContentsFormProps) {
+function ContentsForm({
+  findPageFromDate,
+  setCurrentPage,
+  lastDate,
+}: ContentsFormProps) {
   const [inputValue, setInputValue] = useState("");
   const { yearMonthDay } = getFormattedDate();
   const handleChange = getNumericValue(setInputValue);
@@ -31,7 +36,7 @@ function ContentsForm({ findPageFromDate, setCurrentPage }: ContentsFormProps) {
       >
         <section className="flex gap-4">
           <p>최신 생성 콘텐츠</p>
-          <p className="font-bold">{yearMonthDay}</p>
+          <p className="font-bold">{lastDate}</p>
         </section>
 
         <section className="flex items-center gap-4">
