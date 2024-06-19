@@ -69,47 +69,54 @@ function PushMsSetting() {
     mutateAddPushMsSetting();
 
     if (!mutateData?.response.ok) {
-      alert(mutateData.data?.Error);
+      alert(mutateData?.data?.Error);
     }
   };
   if (data?.response.status === 401) return;
   return (
     <Setting onClick={handleSubbmit} settingHeader="발송 시간 설정">
-      <section className="relative">
-        <DropdownButton type="hour" content={`${hourDropdownItem}시`}>
-          <Image
-            src={Dropdown}
-            alt="dropdown"
-            className={`w-[20px] ${
-              isOpenedHourDropdown ? "rotate-180" : ""
-            } transition-all select-none`}
-          />
-        </DropdownButton>
+      <div className="flex flex-col gap-4 items-center">
+        <section className="flex gap-4">
+          <section className="relative flex items-center gap-4">
+            <p>매일</p>
+            <DropdownButton type="hour" content={`${hourDropdownItem}시`}>
+              <Image
+                src={Dropdown}
+                alt="dropdown"
+                className={`w-[20px] ${
+                  isOpenedHourDropdown ? "rotate-180" : ""
+                } transition-all select-none`}
+              />
+            </DropdownButton>
 
-        {isOpenedHourDropdown && (
-          <DropdownList>
-            <DropdownItems type="hour" />
-          </DropdownList>
-        )}
-      </section>
+            {isOpenedHourDropdown && (
+              <DropdownList>
+                <DropdownItems type="hour" />
+              </DropdownList>
+            )}
+          </section>
 
-      <section className="relative">
-        <DropdownButton type="minute" content={`${minuteDropdownItem}분`}>
-          <Image
-            src={Dropdown}
-            alt="dropdown"
-            className={`w-[20px] ${
-              isOpenedMinuteDropdown ? "rotate-180" : ""
-            } transition-all select-none`}
-          />
-        </DropdownButton>
+          <section className="relative flex items-center gap-4">
+            <DropdownButton type="minute" content={`${minuteDropdownItem}분`}>
+              <Image
+                src={Dropdown}
+                alt="dropdown"
+                className={`w-[20px] ${
+                  isOpenedMinuteDropdown ? "rotate-180" : ""
+                } transition-all select-none`}
+              />
+            </DropdownButton>
 
-        {isOpenedMinuteDropdown && (
-          <DropdownList>
-            <DropdownItems type="minute" />
-          </DropdownList>
-        )}
-      </section>
+            {isOpenedMinuteDropdown && (
+              <DropdownList>
+                <DropdownItems type="minute" />
+              </DropdownList>
+            )}
+            <p>에</p>
+          </section>
+        </section>
+        <p>푸시 메세지가 자동 발송됩니다.</p>
+      </div>
     </Setting>
   );
 }
