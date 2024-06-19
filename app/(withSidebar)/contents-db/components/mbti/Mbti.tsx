@@ -12,8 +12,11 @@ import promptAPI from "../../../../_services/prompt/api";
 import dayjs from "dayjs";
 import contentsAPI from "../../../../_services/contents/api";
 import useLoginVerification from "../../../../_hooks/useLoginVerification";
+import useMissingDateStateStore from "../../../../_stores/useMissingDateStateStore";
+import NoContents from "../../../../_components/noContents/NoContents";
 
 function Mbti() {
+  const { missingDateState } = useMissingDateStateStore();
   const today = dayjs().format("YYYYMMDD");
   const [date, setDate] = useState(today);
   const [isClickedHistoryButton, setIsClickedHistoryButton] = useState(false);
@@ -81,7 +84,11 @@ function Mbti() {
             setDate,
           }}
         />
-        <MbtiContentsTable mbtiContents={mbtiContents?.data} />
+        {missingDateState ? (
+          <NoContents />
+        ) : (
+          <MbtiContentsTable mbtiContents={mbtiContents?.data} />
+        )}
       </section>
       {isClickedHistoryButton && (
         <PromptHistory

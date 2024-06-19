@@ -13,8 +13,11 @@ import contentsAPI from "../../../../_services/contents/api";
 import promptAPI from "../../../../_services/prompt/api";
 import useScrollToTop from "../../../../_hooks/useScrollToTop";
 import useLoginVerification from "../../../../_hooks/useLoginVerification";
+import NoContents from "../../../../_components/noContents/NoContents";
+import useMissingDateStateStore from "../../../../_stores/useMissingDateStateStore";
 
 function Zodiac() {
+  const { missingDateState } = useMissingDateStateStore();
   const { isVisible, scrollToTop } = useScrollToTop();
   const today = dayjs().format("YYYYMMDD");
   const [date, setDate] = useState(today);
@@ -84,7 +87,11 @@ function Zodiac() {
             setDate,
           }}
         />
-        <ZodiacContentsTable zodiacContents={zodiacContents?.data} />
+        {missingDateState ? (
+          <NoContents />
+        ) : (
+          <ZodiacContentsTable zodiacContents={zodiacContents?.data} />
+        )}
       </section>
       {isClickedHistoryButton && (
         <PromptHistory

@@ -12,8 +12,11 @@ import { QUERY_KEYS } from "../../../../_constants/queryKey";
 import promptAPI from "../../../../_services/prompt/api";
 import contentsAPI from "../../../../_services/contents/api";
 import useLoginVerification from "../../../../_hooks/useLoginVerification";
+import NoContents from "../../../../_components/noContents/NoContents";
+import useMissingDateStateStore from "../../../../_stores/useMissingDateStateStore";
 
 function Star() {
+  const { missingDateState } = useMissingDateStateStore();
   const today = dayjs().format("YYYYMMDD");
   const [date, setDate] = useState(today);
   const [isClickedHistoryButton, setIsClickedHistoryButton] = useState(false);
@@ -82,7 +85,11 @@ function Star() {
             setDate,
           }}
         />
-        <StarContentsTable starContents={starContents?.data} />
+        {missingDateState ? (
+          <NoContents />
+        ) : (
+          <StarContentsTable starContents={starContents?.data} />
+        )}
       </section>
       {isClickedHistoryButton && (
         <PromptHistory

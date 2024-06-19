@@ -12,8 +12,11 @@ import contentsAPI from "../../../../_services/contents/api";
 import dayjs from "dayjs";
 import PushMsContentsTable from "./pushMsTable/pushMsContentsTable/PushMsContentsTable";
 import useLoginVerification from "../../../../_hooks/useLoginVerification";
+import NoContents from "../../../../_components/noContents/NoContents";
+import useMissingDateStateStore from "../../../../_stores/useMissingDateStateStore";
 
 function PushMsDB() {
+  const { missingDateState } = useMissingDateStateStore();
   const today = dayjs().format("YYYYMMDD");
   const [date, setDate] = useState(today);
   const [isClickedHistoryButton, setIsClickedHistoryButton] = useState(false);
@@ -81,8 +84,11 @@ function PushMsDB() {
             setDate,
           }}
         />
-
-        <PushMsContentsTable todayContents={todayContents?.data} />
+        {missingDateState ? (
+          <NoContents />
+        ) : (
+          <PushMsContentsTable todayContents={todayContents?.data} />
+        )}
       </section>
       {isClickedHistoryButton && (
         <PromptHistory
