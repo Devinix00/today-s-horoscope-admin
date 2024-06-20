@@ -33,15 +33,14 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
     const newState = !isClickedButtonMap[index];
     setIsClickedButtonMap((prev) => ({ ...prev, [index]: newState }));
 
-    setInputValue(message);
-
     if (newState) {
+      setInputValue(message);
       setEditingIndex(index);
       setTimeout(() => {
         textareaRef.current?.focus();
       }, 0);
     } else {
-      editContents({ id, inputValue: message });
+      editContents({ id, inputValue });
       setEditingIndex(null);
     }
   };
@@ -73,7 +72,9 @@ function ZodiacContentsTableRow({ zodiac }: ZodiacContentsTableRowProps) {
           <TableCell size="sm">
             <TableButton
               isClickedButton={!!isClickedButtonMap[i]}
-              onClick={() => handleClickButton(i, inputValue, message.msg_id)}
+              onClick={() =>
+                handleClickButton(i, message.luck_msg, message.msg_id)
+              }
             >
               {editingIndex === i && !!isClickedButtonMap[i] ? "저장" : "수정"}
             </TableButton>
