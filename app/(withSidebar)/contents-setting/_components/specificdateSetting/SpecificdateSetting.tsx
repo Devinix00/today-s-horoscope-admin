@@ -37,7 +37,7 @@ function SpecificdateSetting() {
       <Setting
         onClick={handleSubmit}
         settingHeader={"특정일 콘텐츠 생성"}
-        settingFooterText="콘텐츠 생성 시 약 2분에서 4분정도가 소요됩니다."
+        settingFooterText="콘텐츠 생성 시 약 4분에서 6분정도가 소요됩니다."
       >
         <section className="flex gap-2 items-center">
           <DropdownInput inputValue={inputValue} handleChange={handleChange} />
