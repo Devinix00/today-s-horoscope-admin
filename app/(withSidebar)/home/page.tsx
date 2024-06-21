@@ -13,7 +13,7 @@ import useLoginVerification from "../../_hooks/useLoginVerification";
 
 function Home() {
   const today = dayjs().format("YYYY/MM/DD");
-  const { data: dashboard } = useQuery({
+  const { data: dashboard, isLoading } = useQuery({
     queryKey: QUERY_KEYS.dashboard(),
     queryFn: () => contentsAPI.getDashboard(),
   });
@@ -32,11 +32,15 @@ function Home() {
             {today}
           </div>
           <div className="absolute top-16">
-            <li>
-              <span className="text-blue-500">
-                {formattedDashboardDate} 생성 완료
-              </span>
-            </li>
+            {isLoading ? (
+              <></>
+            ) : (
+              <li>
+                <span className="text-blue-500">
+                  {formattedDashboardDate} 생성 완료
+                </span>
+              </li>
+            )}
           </div>
           <ShortcutsLink type={routes.CONTENTS_DB} href={routes.CONTENTS_DB} />
         </HomeContent>
