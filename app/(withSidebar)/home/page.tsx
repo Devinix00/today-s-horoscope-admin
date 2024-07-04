@@ -21,8 +21,6 @@ function Home() {
   useLoginVerification(dashboard?.response);
 
   if (dashboard?.response.status === 401) return;
-  const dashboardDate = dashboard?.data.split("").slice(0, 8).join("");
-  const formattedDashboardDate = dayjs(dashboardDate).format("YYYY/MM/DD");
 
   return (
     <MainContainer>
@@ -36,8 +34,14 @@ function Home() {
               <></>
             ) : (
               <li>
-                <span className="text-blue-500">
-                  {formattedDashboardDate} 생성 완료
+                <span
+                  className={`${
+                    dashboard.data.includes("생성 오류")
+                      ? "text-red-500"
+                      : "text-blue-500"
+                  } `}
+                >
+                  {dashboard.data}
                 </span>
               </li>
             )}

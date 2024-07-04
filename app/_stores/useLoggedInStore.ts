@@ -13,7 +13,7 @@ const useLoggedInStore = create(
       setLoggedIn: (authState: boolean) => set(() => ({ loggedIn: authState })),
     }),
     {
-      name: "storage",
+      name: "login-storage",
       storage: createJSONStorage(() => localStorage),
     }
   )
