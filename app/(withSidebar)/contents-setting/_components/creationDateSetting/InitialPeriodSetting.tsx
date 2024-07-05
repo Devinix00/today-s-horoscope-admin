@@ -23,6 +23,16 @@ function InitialPeriodSetting() {
     e.preventDefault();
 
     try {
+      if (
+        confirm(
+          `${fromInputValue}부터 ${toInputValue}까지 콘텐츠를 생성합니다.`
+        )
+      ) {
+        alert("설정합니다.");
+      } else {
+        return alert("취소합니다.");
+      }
+
       mutateAddInitialPeriodSetting();
     } catch (error) {
       console.error(error);
